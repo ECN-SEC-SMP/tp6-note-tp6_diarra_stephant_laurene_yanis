@@ -12,6 +12,7 @@ Plateau::Plateau() {
         for(int x = 0; x < 5; x++) {
             //Ne pas instancier les coins
             if((y == 0 || y == 4) && (x == 0 || x == 4)) {
+                cases[x][y] = nullptr;
                 continue;
             }
 
@@ -64,8 +65,9 @@ Case* Plateau::getCase(int x, int y) {
 void Plateau::Affichage() {
     for(int x = 0; x < 5; x++) {
         for(int y = 0; y < 5; y++) {
-            if(cases[x][y]) 
+            if(cases[x][y]) {
                 cases[x][y]->AffichageCase();
+            } 
         }
     }
     return;
