@@ -10,7 +10,7 @@ class Case
 private:
     int Pos_X;
     int Pos_Y;
-    std::array<Cercle,3> cercles;
+    std::array<Cercle*,3> cercles;
 
 public:
     // Constructeurs
@@ -20,12 +20,12 @@ public:
     // Accesseurs
     int getPosX();
     int getPosY();
-    std::array<Cercle,3> getCercles();
+    std::array<Cercle*,3> getCercles();
 
     // Mutateurs
     void setPosX(int Pos_X);
     void setPosY(int Pos_Y);
-    void setCercles(std::array<Cercle,3> cercles, int index);
+    void setCercles(Cercle* cercle, int index);
 
     // Méthodes
     void AffichageCase();

@@ -10,13 +10,14 @@ Case::Case()
 {
     this->Pos_X = 0;
     this->Pos_Y = 0;
+    this->cercles = {nullptr, nullptr, nullptr};
 }
 
 Case::Case(int Pos_X, int Pos_Y)
 {
     this->Pos_X = Pos_X;
     this->Pos_Y = Pos_Y;
-    this->cercles = cercles;
+    this->cercles = {nullptr, nullptr, nullptr};
 }
 
 // Accesseurs
@@ -30,7 +31,7 @@ int Case::getPosY()
     return Pos_Y;
 }
 
-std::array<Cercle,3> Case::getCercles()
+std::array<Cercle*,3> Case::getCercles()
 {
     return cercles;
 }
@@ -46,9 +47,9 @@ void Case::setPosY(int Pos_Y)
     this->Pos_Y = Pos_Y;
 }
 
-void Case::setCercles(std::array<Cercle,3> cercles, int index)
+void Case::setCercles(Cercle* cercle, int index)
 {
-    this->cercles[index] = cercles[index];
+    this->cercles[index] = cercle;
 }
 
 // Méthodes
@@ -92,8 +93,11 @@ void Case::AffichageCase()
         }
     };
     // Affichage des cercles ensuite
-    for (const Cercle &cercle : cercles)
+
+    for (int idx = 0; idx < cercles.size(); idx++)
     {
-        cercle.AffichageCercle(Pos_x, Pos_y);
+        if (cercles[idx] != nullptr) {
+            cercles[idx]->AffichageCercle(Pos_x, Pos_y);    // Pas d'affichage s'il n'y a pas de 
+        }
     }
 }
