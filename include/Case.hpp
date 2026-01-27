@@ -25,7 +25,7 @@ public:
     // Mutateurs
     void setPosX(int Pos_X);
     void setPosY(int Pos_Y);
-    void setCercles(std::array<Cercle,3> cercles, int index);
+    void setCercles(Cercle cercle, int index);
 
     // Méthodes
     void AffichageCase();

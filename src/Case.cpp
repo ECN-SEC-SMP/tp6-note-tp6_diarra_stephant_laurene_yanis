@@ -30,7 +30,7 @@ int Case::getPosY()
     return Pos_Y;
 }
 
-std::array<Cercle,3> Case::getCercles()
+std::array<Cercle, 3> Case::getCercles()
 {
     return cercles;
 }
@@ -46,7 +46,7 @@ void Case::setPosY(int Pos_Y)
     this->Pos_Y = Pos_Y;
 }
 
-void Case::setCercles(std::array<Cercle,3> cercles, int index)
+void Case::setCercles(Cercle cercle, int index)
 {
     this->cercles[index] = cercles[index];
 }
@@ -92,8 +92,9 @@ void Case::AffichageCase()
         }
     };
     // Affichage des cercles ensuite
-    for (const Cercle &cercle : cercles)
+
+    for (int idx = 0; idx < cercles.size(); idx++)
     {
-        cercle.AffichageCercle(Pos_x, Pos_y);
+        ;
     }
 }
