@@ -37,5 +37,5 @@ void Cercle::setCouleur(CouleurCercle couleur)
 // Méthodes
 void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
 {
-    
+    ;
 }
