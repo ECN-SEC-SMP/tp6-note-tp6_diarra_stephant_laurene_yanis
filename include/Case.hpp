@@ -20,10 +20,12 @@ public:
     // Accesseurs
     int getPosX();
     int getPosY();
+    std::array<Cercle,3> getCercles();
 
     // Mutateurs
     void setPosX(int Pos_X);
     void setPosY(int Pos_Y);
+    void setCercles(std::array<Cercle,3> cercles, int index);
 
     // Méthodes
     void AffichageCase();

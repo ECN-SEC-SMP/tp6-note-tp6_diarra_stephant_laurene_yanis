@@ -55,11 +55,14 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
     case CouleurCercle::vert:
         couleurCase = "\033[42m";
         break;
+    default:
+        couleurCase = "\033[41m";
+        break;
     }
 
     switch (taille)
     {
-    case TailleCercle::petite:
+    case TailleCercle::grande:
         for (int i = Pos_X - 2; i <= Pos_X + 2; i++)
         {
             for (int j = Pos_Y - 2; j <= Pos_Y + 2; j++)
@@ -131,7 +134,7 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
             }
         }
         break;
-    case TailleCercle::grande:
+    case TailleCercle::petite:
         std::cout << couleurCase << "O";
         break;
     }
