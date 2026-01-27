@@ -9,17 +9,17 @@ class Joueur {
         
     protected:
         int IdJoueur;
-        couleurCercle  Couleur;
+        CouleurCercle  Couleur;
 
     public :
         // Constructeurs
-        Joueur(int idJoueur, couleurCercle c);
+        Joueur(int idJoueur, CouleurCercle c);
 
-        virtual  void Jouer(Cercle* cercle, Case* cible); //propose un coup
+        virtual  Coup Jouer(Cercle* cercle, Case* cible)=0; //propose un coup
 
         //getters
         int getIdJoueur();
-        couleurCercle getCouleur();
+        CouleurCercle getCouleur();
 };
 
 

@@ -1,4 +1,5 @@
 set(SOURCE_FILES    main.cpp
+                    Joueur.cpp
                     ) #Add source files here
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
