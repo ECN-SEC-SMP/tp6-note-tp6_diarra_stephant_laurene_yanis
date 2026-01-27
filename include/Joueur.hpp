@@ -15,7 +15,7 @@ class Joueur {
         // Constructeurs
         Joueur(int idJoueur, CouleurCercle c);
 
-        virtual  Coup Jouer(Cercle* cercle, Case* cible)=0; //propose un coup
+        virtual  Coup Jouer()=0; //propose un coup
 
         //getters
         int getIdJoueur();
