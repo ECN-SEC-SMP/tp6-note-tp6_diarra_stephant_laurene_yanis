@@ -6,5 +6,6 @@ class Bot : public Joueur
 public:
     Bot(/* args */);
 
-    void Jouer(Cercle* cercle, Case* caseCible) override;
+    Coup Jouer() override;
+    int verifierColonne();
 };

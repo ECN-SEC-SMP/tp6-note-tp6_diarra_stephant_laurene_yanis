@@ -1,25 +1,22 @@
 #pragma once
 
-#include <iostream>
 #include "CouleurCercle.hpp"
-#include "Plateau.hpp"
 #include "Coup.hpp"
+#include "Plateau.hpp"
 
 class Joueur {
-    private :
         
     protected:
-        int IdJoueur;
         CouleurCercle  Couleur;
+        Plateau* plateau;
 
     public :
         // Constructeurs
-        Joueur(int idJoueur, CouleurCercle c);
+        Joueur(Plateau* plateau, CouleurCercle c);
 
-        virtual  Coup Jouer()=0; //propose un coup
+        virtual Coup Jouer()=0; //propose un coup
 
         //getters
-        int getIdJoueur();
         CouleurCercle getCouleur();
 };
 

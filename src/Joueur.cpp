@@ -3,16 +3,13 @@
 
 
 // Constructeurs
-Joueur::Joueur(int idJoueur, CouleurCercle c){
-    this->IdJoueur = idJoueur;
+Joueur::Joueur(Plateau* plateau, CouleurCercle c){
+    this->plateau = plateau;
     this->Couleur = c;
 }
 
 
 //getters
-int Joueur::getIdJoueur() {
-    return this->IdJoueur;
-}
 
 CouleurCercle Joueur::getCouleur(){
     return this->Couleur;
