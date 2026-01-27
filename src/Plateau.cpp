@@ -1,44 +1,41 @@
-#include <string>
-#include <vector>
+#include <cassert>
 
 #include "Case.hpp"
 #include "Plateau.hpp"
 
 // Constructeurs
 Plateau::Plateau() {        
-    this->l = 3;
-    this->L = 3;
+    //Instancier toutes les cases du plateau
+    for(int y = 0; y < 5; y++) {
+        for(int x = 0; x < 5; x++) {
+            //Ne pas instancier les coins
+            if((y == 0 || y == 4) && (x == 0 || x == 4)) {
+                continue;
+            }
+
+            cases[x][y] = new Case(x, y);
+        }
+    }
 }
 
-Plateau::Plateau(int l, int L) {
-    this->l = l;
-    this->L = L;
+Plateau::~Plateau() {
+    //Détruire toutes les instances de case
+    for(int x = 0; x < 5; x++) {
+        for(int y = 0; y < 5; y++) {
+            Case* c = cases[x][y];
+            if(c) {
+                delete c;
+            }
+        }
+    }
 }
 
-// Accesseurs
-int Plateau::getLongueur() {
-    return L;
-}
-
-int Plateau::getLargeur() {
-    return l;
-}
-
+// Accesseur
 Case* Plateau::getCase(int x, int y) {
+    //Validation des entrées
+    assert(x >= 0 && x<5);
+    assert(y >= 0 && y<5);
     return cases[x][y];
-}
-
-// Mutateurs
-void Plateau::setLongueur(int L) {
-    this->L = L;
-}
-
-void Plateau::setLargeur(int l) {
-    this->l = l;
-}
-
-void Plateau::setCase(int x, int y, Case* c) {
-    ;
 }
 
 // Méthodes
