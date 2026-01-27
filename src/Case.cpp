@@ -58,31 +58,31 @@ void Case::AffichageCase()
     int Pos_x = this->Pos_X;
     int Pos_y = this->Pos_Y;
     // Affichage de la case en premier
-    for (int i = Pos_X - 3; i <= Pos_X + 3; i++)
+    for (int i = Pos_X; i <= Pos_X + 6; i++)
     {
-        for (int j = Pos_Y - 3; j <= Pos_Y + 3; j++)
+        for (int j = Pos_Y; j <= Pos_Y + 6; j++)
         {
-            if (i == Pos_X - 3 && j == Pos_Y - 3)
+            if (i == Pos_X && j == Pos_Y)
             {
                 std::cout << "┌";
             }
-            else if (i == Pos_X + 3 && j == Pos_Y - 3)
+            else if (i == Pos_X + 6 && j == Pos_Y)
             {
                 std::cout << "┐";
             }
-            else if (i == Pos_X - 3 && j == Pos_Y + 2)
+            else if (i == Pos_X && j == Pos_Y + 6)
             {
                 std::cout << "└";
             }
-            else if (i == Pos_X + 3 && j == Pos_Y + 3)
+            else if (i == Pos_X + 6 && j == Pos_Y + 6)
             {
                 std::cout << "┘";
             }
-            else if (j == Pos_Y - 3 || j == Pos_Y + 3)
+            else if (j == Pos_Y || j == Pos_Y + 6)
             {
                 std::cout << "─";
             }
-            else if (i == Pos_X - 3 || i == Pos_X + 3)
+            else if (i == Pos_X || i == Pos_X + 6)
             {
                 std::cout << "│";
             }
@@ -92,8 +92,8 @@ void Case::AffichageCase()
             }
         }
     };
-    // Affichage des cercles ensuite
 
+    // Affichage des cercles ensuite
     for (int idx = 0; idx < cercles.size(); idx++)
     {
         if (cercles[idx] != nullptr) {
