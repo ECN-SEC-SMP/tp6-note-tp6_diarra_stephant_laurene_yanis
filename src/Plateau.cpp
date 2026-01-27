@@ -1,6 +1,8 @@
 #include <cassert>
 
 #include "Case.hpp"
+#include "CouleurCercle.hpp"
+#include "TailleCercle.hpp"
 #include "Plateau.hpp"
 
 // Constructeurs
@@ -14,6 +16,26 @@ Plateau::Plateau() {
             }
 
             cases[x][y] = new Case(x, y);
+
+            //Initialiser la case avec des cercles si besoin
+            if(y == 0) {
+                //TODO: Moche de ouf
+                cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::bleu), TailleCercle::grande);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::bleu), TailleCercle::moyenne);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::bleu), TailleCercle::petite);
+            } else if(y == 4) {
+                cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::rouge), TailleCercle::grande);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::rouge), TailleCercle::moyenne);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::rouge), TailleCercle::petite);
+            } else if(x == 0) {
+                cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::jaune), TailleCercle::grande);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::jaune), TailleCercle::moyenne);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::jaune), TailleCercle::petite);
+            } else if(x == 4) {
+                cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::vert), TailleCercle::grande);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::vert), TailleCercle::moyenne);
+                cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::vert), TailleCercle::petite);
+            }
         }
     }
 }
@@ -40,13 +62,16 @@ Case* Plateau::getCase(int x, int y) {
 
 // Méthodes
 void Plateau::Affichage() {
-    ;
+    //TODO: STUB
+    return;
 }
 
 bool Plateau::placerCercle(Cercle* cercle, Case* cible) {
-    ;
+    //TODO: STUB
+    return false;
 }
 
 bool Plateau::victoire(CouleurCercle couleur) {
-    ;
+    //TODO: STUB
+    return false;
 }
