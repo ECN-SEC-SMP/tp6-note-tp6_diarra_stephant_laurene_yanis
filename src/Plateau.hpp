@@ -22,13 +22,17 @@ public:
     // Accesseurs
     int getLongueur();
     int getLargeur();
+    Case* getCase(int x, int y);
 
     // Mutateurs
     void setLongueur(int L);
     void setLargeur(int l);
+    void setCase(int x, int y, Case* c);    // ?
 
     // Méthodes
     void Affichage();
+    bool placerCercle(Cercle* cercle, Case* cible);
+    bool victoire(CouleurCercle couleur);
 
     // Destructeurs
 };
