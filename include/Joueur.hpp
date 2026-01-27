@@ -6,27 +6,20 @@
 
 class Joueur {
     private :
-        int IdJoueur;
-        int tour;
-        CouleurCercle  Couleur;
-        bool victoire;
-
+        
     protected:
-        Plateau * plateau;
+        int IdJoueur;
+        couleurCercle  Couleur;
 
     public :
         // Constructeurs
-        Joueur();
-        Joueur(int idJoueur, CouleurCercle couleur);
+        Joueur(int idJoueur, couleurCercle c);
 
-        virtual  void Jouer(Cercle* cercle, Case* caseCible);
+        virtual  void Jouer(Cercle* cercle, Case* cible); //propose un coup
 
         //getters
         int getIdJoueur();
-        int getTour();
-        int getDeplacement();
-        std::string getCouleur();
-        bool getVictoire();
+        couleurCercle getCouleur();
 };
 
 
