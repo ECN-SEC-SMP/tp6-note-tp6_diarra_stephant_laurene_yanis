@@ -62,7 +62,12 @@ Case* Plateau::getCase(int x, int y) {
 
 // Méthodes
 void Plateau::Affichage() {
-    //TODO: STUB
+    for(int x = 0; x < 5; x++) {
+        for(int y = 0; y < 5; y++) {
+            if(cases[x][y]) 
+                cases[x][y]->AffichageCase();
+        }
+    }
     return;
 }
 
