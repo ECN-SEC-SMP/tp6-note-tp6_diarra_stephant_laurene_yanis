@@ -49,7 +49,7 @@ void Case::setPosY(int Pos_Y)
 
 void Case::setCercles(Cercle* cercle, int index)
 {
-    this->cercles[index] = cercles[index];
+    this->cercles[index] = cercle;
 }
 
 // Méthodes
@@ -97,7 +97,7 @@ void Case::AffichageCase()
     for (int idx = 0; idx < cercles.size(); idx++)
     {
         if (cercles[idx] != nullptr) {
-            cercles[idx]->AffichageCercle(Pos_x, Pos_y);
+            cercles[idx]->AffichageCercle(Pos_x, Pos_y);    // Pas d'affichage s'il n'y a pas de 
         }
     }
 }
