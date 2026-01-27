@@ -49,8 +49,12 @@ class Controleur {
 // Méthodes de la classe
 /*-------------------------------------------------------------------------------*/
 /**
- * @brief 
- * 
+ * @brief gère le déroulement de la partie
+ * boucle prinicpale de la partie
+ * Affiche plateau,
+ * appèle gérerTour() tant que la partie n'est pas terminée
+ * vérifier s'il y a victoire après chaque tour
+ * appelle le joueur suivant
  */
     void runPartie();
 
@@ -61,10 +65,13 @@ class Controleur {
     void nextJoueur();
 
 /**
- * @brief gère le tour du joueur courant
- * 
+ * @brief récupére l'action du joueur courant
+ * valide l'action via le plateau
+ * met à jour l'état de la partie
+ * vérifie la condition de fin de partie
+ * passe au joueur suivant
  */
-    void gererTour(); //choix joueur + gestion de son tour
+    void gererTour();
     
 /**
  * @brief Vérifie via le plateau si le coup proposé par le joueur est valide
@@ -74,6 +81,8 @@ class Controleur {
  */
     void jouerCoup(Joueur* joueur); //gestion du coup joué par le joueur
 
-    // Destructeur
+/*-------------------------------------------------------------------------------*/
+// Destructeurs
+/*-------------------------------------------------------------------------------*/
     ~Controleur();
 };

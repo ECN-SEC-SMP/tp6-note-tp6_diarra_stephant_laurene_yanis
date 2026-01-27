@@ -3,6 +3,7 @@
 #include <iostream>
 #include "CouleurCercle.hpp"
 #include "Plateau.hpp"
+#include "Coup.hpp"
 
 class Joueur {
     private :
