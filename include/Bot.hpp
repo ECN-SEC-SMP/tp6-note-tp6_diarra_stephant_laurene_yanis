@@ -8,7 +8,3 @@ public:
 
     void Jouer(Cercle* cercle, Case* caseCible) override;
 };
-
-Bot::Bot(/* args */)
-{
-}
