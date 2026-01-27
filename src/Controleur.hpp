@@ -5,23 +5,26 @@
 #include "Joueur.hpp"
 
 
-
 class Controleur {
+
     private:
     int nbrJoueur;
     Plateau *plateau;
     int joueurCouant;
-    Joueur * joueurs[nbrJoueur];
-
-
+    Joueur * joueurs[ 4 ];
+    bool partieTerminee;
 
     public:
-    // Constructeurs
+
+/*-------------------------------------------------------------------------------*/
+// Constructeurs
+/*-------------------------------------------------------------------------------*/
     Controleur();
-    
     Controleur(int nbrJoueurs, Plateau* plateau, Joueur* joueurs[]);
 
-    // Getters
+/*-------------------------------------------------------------------------------*/
+// Getters
+/*-------------------------------------------------------------------------------*/
     int getNbrJoueur();
 
     Plateau* getPlateau();
@@ -32,7 +35,9 @@ class Controleur {
 
     Joueur* getlistJoueurs();
 
-    // Setters
+/*-------------------------------------------------------------------------------*/
+// Setters
+/*-------------------------------------------------------------------------------*/
     void setNbrJoueur(int nbrJoueurs);
 
     void setPlateau(Plateau* plateau);
@@ -40,16 +45,16 @@ class Controleur {
     void setJoueurCourant(int joueurCourant);
 
 
+/*-------------------------------------------------------------------------------*/
+// Méthodes de la classe
+/*-------------------------------------------------------------------------------*/
+    void runPartie();
 
-    // Méthodes de la classe
-    bool verifierVictoire();
+    void nextJoueur();
 
-    bool verifierDeplacement();
+    void gererTour(); //choix joueur + gestion de son tour
 
-
-    Plateau updatePlateau(Cercle *cercle, Case *Case);
-
-    void GérerTour(); //choix joueur + gestion de son tour
+    void jouerCoup(Joueur* joueur); //gestion du coup joué par le joueur
 
     // Destructeur
     ~Controleur();
