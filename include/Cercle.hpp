@@ -63,4 +63,5 @@ public:
     void AffichageCercle(int Pos_X, int Pos_Y); // Compléter avec Case.hpp
 
     /// @name Destructeur
+    Case::~Case
 };

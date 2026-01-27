@@ -101,3 +101,16 @@ void Case::AffichageCase()
         }
     }
 }
+
+// Destructeurs
+Case::~Case()
+{
+    for (Cercle* cercle : cercles)
+    {
+        if (cercle != nullptr)
+        {
+            delete cercle;
+            cercle = nullptr;
+        }
+    }
+}
