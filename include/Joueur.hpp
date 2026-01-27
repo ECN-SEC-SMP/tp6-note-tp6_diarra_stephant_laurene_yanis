@@ -10,6 +10,8 @@ class Joueur {
         int tour;
         CouleurCercle  Couleur;
         bool victoire;
+
+    protected:
         Plateau * plateau;
 
     public :
