@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "CouleurCercle.hpp"
 #include "Plateau.hpp"
@@ -15,7 +17,7 @@ class Joueur {
         Joueur();
         Joueur(int idJoueur, CouleurCercle couleur);
 
-        virtual  void Jouer(Cercle* cercle, Case * case);
+        virtual  void Jouer(Cercle* cercle, Case* caseCible);
 
         //getters
         int getIdJoueur();
