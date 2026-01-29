@@ -31,7 +31,7 @@ int Case::getPosY()
     return Pos_Y;
 }
 
-std::array<Cercle*,3> Case::getCercles()
+std::array<Cercle *, 3> Case::getCercles()
 {
     return cercles;
 }
@@ -47,65 +47,68 @@ void Case::setPosY(int Pos_Y)
     this->Pos_Y = Pos_Y;
 }
 
-void Case::setCercles(Cercle* cercle, int index)
+void Case::setCercles(Cercle *cercle, int index)
 {
     this->cercles[index] = cercle;
 }
 
 // Méthodes
-void Case::AffichageCase()
+
+void Case::AffichageCase(std::vector<std::string> &buffer, int startLine)
 {
     int Pos_x = this->Pos_X;
     int Pos_y = this->Pos_Y;
-    // Affichage de la case en premier
+
+    // Affichage de la case en stockant dans le buffer
     for (int i = Pos_X; i <= Pos_X + 6; i++)
     {
+        std::string ligne = "";
         for (int j = Pos_Y; j <= Pos_Y + 6; j++)
         {
             if (i == Pos_X && j == Pos_Y)
             {
-                std::cout << "┌";
+                ligne += "┌";
             }
             else if (i == Pos_X + 6 && j == Pos_Y)
             {
-                std::cout << "┐";
+                ligne += "└";
             }
             else if (i == Pos_X && j == Pos_Y + 6)
             {
-                std::cout << "└";
+                ligne += "┐";
             }
             else if (i == Pos_X + 6 && j == Pos_Y + 6)
             {
-                std::cout << "┘";
+                ligne += "┘";
             }
             else if (j == Pos_Y || j == Pos_Y + 6)
             {
-                std::cout << "─";
+                ligne += "│";
             }
             else if (i == Pos_X || i == Pos_X + 6)
             {
-                std::cout << "│";
+                ligne += "──";
             }
             else
             {
-                std::cout << " ";
+                // Affichage des cercles ensuite
+                for (int idx = 0; idx < cercles.size(); idx++)
+                {
+                    if (cercles[idx] != nullptr)
+                    {
+                        cercles[idx]->AffichageCercle(Pos_x, Pos_y);
+                    }
+                }
+                ligne += "  ";
             }
         }
-    };
-
-    // Affichage des cercles ensuite
-    for (int idx = 0; idx < cercles.size(); idx++)
-    {
-        if (cercles[idx] != nullptr) {
-            cercles[idx]->AffichageCercle(Pos_x, Pos_y);    // Pas d'affichage si le contenu de l'array à l'index idx est vide (nullptr)
-        }
+        buffer[startLine + (i - Pos_X)] += ligne;
     }
 }
-
 // Destructeurs
 Case::~Case()
 {
-    for (Cercle* cercle : cercles)
+    for (Cercle *cercle : cercles)
     {
         if (cercle != nullptr)
         {

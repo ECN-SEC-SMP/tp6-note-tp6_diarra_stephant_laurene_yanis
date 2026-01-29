@@ -2,6 +2,7 @@
 
 #include <string>
 #include <array>
+#include <vector>
 
 #include "Cercle.hpp"
 
@@ -74,7 +75,7 @@ public:
     /**
      * @brief Affichage d'une case et des cercles à l'intérieur (s'il y en a)
      */
-    void AffichageCase();
+    void AffichageCase(std::vector<std::string> &buffer, int startLine);
 
     /// @name Destructeurs
     ~Case();
