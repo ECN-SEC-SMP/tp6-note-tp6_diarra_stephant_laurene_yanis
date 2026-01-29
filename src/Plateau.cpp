@@ -64,21 +64,12 @@ Case* Plateau::getCase(int x, int y) {
 
 // Méthodes
 void Plateau::Affichage() {
-    // Buffer pour stocker les lignes
-    std::vector<std::string> buffer(7, "");  // 7 lignes pour une case (0-6)
-    
     for(int y = 0; y < 5; y++) {
         for(int x = 0; x < 5; x++) {
             if(cases[x][y]) {
-                cases[x][y]->AffichageCase(buffer, 0);
+                cases[x][y]->AffichageCase(x,y);
             } 
         }
-        // Afficher les 7 lignes du plateau actuel
-        for(const auto& ligne : buffer) {
-            std::cout << ligne << std::endl;
-        }
-        // Réinitialiser le buffer pour la prochaine rangée
-        buffer.assign(7, "");
     }
 }
 

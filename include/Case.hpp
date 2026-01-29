@@ -75,7 +75,7 @@ public:
     /**
      * @brief Affichage d'une case et des cercles à l'intérieur (s'il y en a)
      */
-    void AffichageCase(std::vector<std::string> &buffer, int startLine);
+    void AffichageCase(int Pos_X, int Pos_Y);
 
     /// @name Destructeurs
     ~Case();
