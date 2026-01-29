@@ -7,5 +7,5 @@ public:
     Bot(/* args */);
 
     Coup Jouer() override;
-    int verifierColonne();
+    int verifierColonne(int num);
 };
