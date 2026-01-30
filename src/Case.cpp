@@ -57,13 +57,13 @@ void Case::setCercles(Cercle *cercle, int index)
 void Case::AffichageCase(int Pos_X, int Pos_Y)
 {
     // Pour que les cases soient séparéées les unes des autres
-    Pos_X = ((Pos_X + 1) * 7) - 6;
+    Pos_X = ((Pos_X + 1) * 7) - 7;
     Pos_Y = ((Pos_Y + 1) * 12) - 11;
 
     this->Pos_X = Pos_X;
+    this->Pos_Y = Pos_Y;
 
-    // Les codes ANSI ne font pas ce que j'attend.
-    // J'ai l'impression qu'il faut génerer un plateau de caractères vides avant d'afficher les cases
+    std::cout << "\033[" << Pos_X << ";" << Pos_Y << "H";
 
     for (int i = Pos_X; i <= Pos_X + 6; i++)
     {
@@ -85,6 +85,10 @@ void Case::AffichageCase(int Pos_X, int Pos_Y)
             {
                 std::cout << "┐";
             }
+            // else if (i == Pos_X + 6 && j == Pos_Y + 1)
+            // {
+            //     std::cout << "  ";
+            // }
             else if (j == Pos_Y || j == Pos_Y + 6)
             {
                 std::cout << "│";
@@ -93,29 +97,22 @@ void Case::AffichageCase(int Pos_X, int Pos_Y)
             {
                 std::cout << "──";
             }
-            else if (i == Pos_X + 6 && j == Pos_Y + 1)
-            {
-
-                // Affichage des cercles ensuite
-                for (int idx = 0; idx < cercles.size(); idx++)
-                {
-                    if (cercles[idx] != nullptr)
-                    {
-                        // cercles[idx]->AffichageCercle(Pos_x, Pos_y);
-                        std::cout << "X";
-                    }
-                    else
-                    {
-                        std::cout << "  ";
-                    }
-                }
-            }
             else
             {
-                std::cout << "  ";
+                std::cout << "  "; // à enlever
             }
         }
-        std::cout << "\033[" << i << ";" << Pos_Y << "H"; // Semble écraser les cases, seulement 5 affichées sur le terminal
+        std::cout << "\033[" << i << ";" << Pos_Y << "H";
+    }
+
+    std::cout << "\033[" << Pos_X+1 << ";" << Pos_Y+1 << "H"<< "O";
+
+    for (int idx = 0; idx < cercles.size(); idx++)
+    {
+        if (cercles[idx] != nullptr)
+        {
+            // cercles[idx]->AffichageCercle(Pos_X+5, Pos_Y+1);
+        }
     }
 }
 
@@ -133,3 +130,4 @@ Case::~Case()
         }
     }
 }
+// Affichage cercle
