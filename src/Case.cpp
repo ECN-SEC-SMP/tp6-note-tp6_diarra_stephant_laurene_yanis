@@ -57,69 +57,68 @@ void Case::setCercles(Cercle *cercle, int index)
 void Case::AffichageCase(int Pos_X, int Pos_Y)
 {
     // Pour que les cases soient séparéées les unes des autres
-    Pos_X = (Pos_X) * 13;
-    Pos_Y = (Pos_Y) * 13;
+    Pos_X = ((Pos_X + 1) * 7) - 6;
+    Pos_Y = ((Pos_Y + 1) * 12) - 11;
 
     this->Pos_X = Pos_X;
-    this->Pos_Y = Pos_Y;
 
-    // Les codes ANSI ne font pas ce que j'attend. 
-    //J'ai l'impression qu'il faut génerer un plateau de caractères vides avant d'afficher les cases
+    // Les codes ANSI ne font pas ce que j'attend.
+    // J'ai l'impression qu'il faut génerer un plateau de caractères vides avant d'afficher les cases
 
-    for (int i = Pos_X; i <= Pos_X + 7; i++)
+    for (int i = Pos_X; i <= Pos_X + 6; i++)
     {
-        for (int j = Pos_Y; j <= Pos_Y + 7; j++)
+        for (int j = Pos_Y; j <= Pos_Y + 6; j++)
         {
-            std::cout << "X";
-        }
-        std::cout << "\033[" << Pos_X + 1 << ";" << Pos_Y << "H";
-    }
-
-    //std::cout << std::endl; // Seule ligne qui permet d'afficher + que 5 cases lol
-    // Affichage de la case en stockant dans le buffer
-    /*
             if (i == Pos_X && j == Pos_Y)
             {
-                std::cout << "┌──────────┐" << "\033[1E";
-            }
-            else if (i == Pos_X && j == Pos_Y + 1)
-            {
-                std::cout << "│          │";
-            }
-            else if (i == Pos_X && j == Pos_Y + 2)
-            {
-                std::cout << "│          │";
-            }
-            else if (i == Pos_X && j == Pos_Y + 3)
-            {
-                std::cout << "│          │";
-            }
-            else if (i == Pos_X && j == Pos_Y + 4)
-            {
-                std::cout << "│          │";
-            }
-            else if (i == Pos_X && j == Pos_Y + 5)
-            {
-                std::cout << "│          │";
+                std::cout << "└";
             }
             else if (i == Pos_X && j == Pos_Y + 6)
             {
-                std::cout << "└──────────┘" << "\033[0m";
+                std::cout << "┘";
             }
-
-            // Affichage des cercles ensuite
-            for (int idx = 0; idx < cercles.size(); idx++)
+            else if (i == Pos_X + 1 && j == Pos_Y)
             {
-                if (cercles[idx] != nullptr)
+                std::cout << "┌";
+            }
+            else if (i == Pos_X + 1 && j == Pos_Y + 6)
+            {
+                std::cout << "┐";
+            }
+            else if (j == Pos_Y || j == Pos_Y + 6)
+            {
+                std::cout << "│";
+            }
+            else if (i == Pos_X || i == Pos_X + 1)
+            {
+                std::cout << "──";
+            }
+            else if (i == Pos_X + 6 && j == Pos_Y + 1)
+            {
+
+                // Affichage des cercles ensuite
+                for (int idx = 0; idx < cercles.size(); idx++)
                 {
-                    // cercles[idx]->AffichageCercle(Pos_x, Pos_y);
+                    if (cercles[idx] != nullptr)
+                    {
+                        // cercles[idx]->AffichageCercle(Pos_x, Pos_y);
+                        std::cout << "X";
+                    }
+                    else
+                    {
+                        std::cout << "  ";
+                    }
                 }
             }
+            else
+            {
+                std::cout << "  ";
+            }
         }
+        std::cout << "\033[" << i << ";" << Pos_Y << "H"; // Semble écraser les cases, seulement 5 affichées sur le terminal
     }
-
-    */
 }
+
 // buffer[startLine + (i - Pos_X)] += ligne;
 
 // Destructeurs

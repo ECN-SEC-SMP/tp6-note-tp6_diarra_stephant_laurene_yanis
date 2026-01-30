@@ -7,33 +7,44 @@
 #include "Plateau.hpp"
 
 // Constructeurs
-Plateau::Plateau() {        
-    //Instancier toutes les cases du plateau
-    for(int y = 0; y < 5; y++) {
-        for(int x = 0; x < 5; x++) {
-            //Ne pas instancier les coins
-            if((y == 0 || y == 4) && (x == 0 || x == 4)) {
+Plateau::Plateau()
+{
+    // Instancier toutes les cases du plateau
+    for (int y = 0; y < 5; y++)
+    {
+        for (int x = 0; x < 5; x++)
+        {
+            // Ne pas instancier les coins
+            if ((y == 0 || y == 4) && (x == 0 || x == 4))
+            {
                 cases[x][y] = nullptr;
                 continue;
             }
 
             cases[x][y] = new Case(x, y);
 
-            //Initialiser la case avec des cercles si besoin
-            if(y == 0) {
-                //TODO: Moche de ouf
+            // Initialiser la case avec des cercles si besoin
+            if (y == 0)
+            {
+                // TODO: Moche de ouf
                 cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::bleu), TailleCercle::grande);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::bleu), TailleCercle::moyenne);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::bleu), TailleCercle::petite);
-            } else if(y == 4) {
+            }
+            else if (y == 4)
+            {
                 cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::rouge), TailleCercle::grande);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::rouge), TailleCercle::moyenne);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::rouge), TailleCercle::petite);
-            } else if(x == 0) {
+            }
+            else if (x == 0)
+            {
                 cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::jaune), TailleCercle::grande);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::jaune), TailleCercle::moyenne);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::jaune), TailleCercle::petite);
-            } else if(x == 4) {
+            }
+            else if (x == 4)
+            {
                 cases[x][y]->setCercles(new Cercle(TailleCercle::grande, CouleurCercle::vert), TailleCercle::grande);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::moyenne, CouleurCercle::vert), TailleCercle::moyenne);
                 cases[x][y]->setCercles(new Cercle(TailleCercle::petite, CouleurCercle::vert), TailleCercle::petite);
@@ -42,12 +53,16 @@ Plateau::Plateau() {
     }
 }
 
-Plateau::~Plateau() {
-    //Détruire toutes les instances de case
-    for(int x = 0; x < 5; x++) {
-        for(int y = 0; y < 5; y++) {
-            Case* c = cases[x][y];
-            if(c) {
+Plateau::~Plateau()
+{
+    // Détruire toutes les instances de case
+    for (int x = 0; x < 5; x++)
+    {
+        for (int y = 0; y < 5; y++)
+        {
+            Case *c = cases[x][y];
+            if (c)
+            {
                 delete c;
             }
         }
@@ -55,30 +70,46 @@ Plateau::~Plateau() {
 }
 
 // Accesseur
-Case* Plateau::getCase(int x, int y) {
-    //Validation des entrées
-    assert(x >= 0 && x<5);
-    assert(y >= 0 && y<5);
+Case *Plateau::getCase(int x, int y)
+{
+    // Validation des entrées
+    assert(x >= 0 && x < 5);
+    assert(y >= 0 && y < 5);
     return cases[x][y];
 }
 
 // Méthodes
-void Plateau::Affichage() {
-    for(int y = 0; y < 5; y++) {
-        for(int x = 0; x < 5; x++) {
-            if(cases[x][y]) {
-                cases[x][y]->AffichageCase(x,y);
-            } 
+void Plateau::Affichage()
+{
+    std::cout << "\033[2J"; // Clear le screen
+    for (int y = 0; y < 5; y++)
+    {
+        for (int x = 0; x < 5; x++)
+        {
+            if (cases[x][y])
+            {
+                cases[x][y]->AffichageCase(x, y);
+            }
         }
     }
+    std::cout << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
+              << std::endl;
 }
 
-bool Plateau::placerCercle(Cercle* cercle, Case* cible) {
-    //TODO: STUB
+bool Plateau::placerCercle(Cercle *cercle, Case *cible)
+{
+    // TODO: STUB
     return false;
 }
 
-bool Plateau::victoire(CouleurCercle couleur) {
-    //TODO: STUB
+bool Plateau::victoire(CouleurCercle couleur)
+{
+    // TODO: STUB
     return false;
 }
