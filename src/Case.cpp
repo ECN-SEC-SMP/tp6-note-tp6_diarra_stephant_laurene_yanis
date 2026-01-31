@@ -57,8 +57,8 @@ void Case::setCercles(Cercle *cercle, int index)
 void Case::AffichageCase(int Pos_X, int Pos_Y)
 {
     // Pour que les cases soient séparéées les unes des autres
-    Pos_X = ((Pos_X + 1) * 7) - 7;
-    Pos_Y = ((Pos_Y + 1) * 12) - 11;
+    Pos_X = ((Pos_X + 1) * 7) - 6;
+    Pos_Y = ((Pos_Y + 1) * 12);
 
     this->Pos_X = Pos_X;
     this->Pos_Y = Pos_Y;
@@ -71,38 +71,34 @@ void Case::AffichageCase(int Pos_X, int Pos_Y)
         {
             if (i == Pos_X && j == Pos_Y)
             {
-                std::cout << "└";
+                std::cout << "┌";
             }
             else if (i == Pos_X && j == Pos_Y + 6)
             {
-                std::cout << "┘";
-            }
-            else if (i == Pos_X + 1 && j == Pos_Y)
-            {
-                std::cout << "┌";
-            }
-            else if (i == Pos_X + 1 && j == Pos_Y + 6)
-            {
                 std::cout << "┐";
             }
-            // else if (i == Pos_X + 6 && j == Pos_Y + 1)
-            // {
-            //     std::cout << "  ";
-            // }
+            else if (i == Pos_X + 6 && j == Pos_Y)
+            {
+                std::cout << "└";
+            }
+            else if (i == Pos_X + 6 && j == Pos_Y + 6)
+            {
+                std::cout << "┘";
+            }
             else if (j == Pos_Y || j == Pos_Y + 6)
             {
                 std::cout << "│";
             }
-            else if (i == Pos_X || i == Pos_X + 1)
+            else if (i == Pos_X || i == Pos_X + 6)
             {
                 std::cout << "──";
             }
             else
             {
-                std::cout << "  "; // à enlever
+                std::cout << "  ";
             }
         }
-        std::cout << "\033[" << i << ";" << Pos_Y << "H";
+        std::cout << "\033[" << (i + 1) << ";" << Pos_Y << "H";
     }
 
     std::cout << "\033[" << Pos_X+1 << ";" << Pos_Y+1 << "H"<< "O";
