@@ -101,13 +101,13 @@ void Case::AffichageCase(int Pos_X, int Pos_Y)
         std::cout << "\033[" << (i + 1) << ";" << Pos_Y << "H";
     }
 
-    std::cout << "\033[" << Pos_X+1 << ";" << Pos_Y+1 << "H"<< "O";
+    std::cout << "\033[" << Pos_X+1 << ";" << Pos_Y+1 << "H";   // Position du curseur OK
 
     for (int idx = 0; idx < cercles.size(); idx++)
     {
         if (cercles[idx] != nullptr)
         {
-            // cercles[idx]->AffichageCercle(Pos_X+5, Pos_Y+1);
+            cercles[idx]->AffichageCercle(Pos_X+1, Pos_Y+1);
         }
     }
 }
