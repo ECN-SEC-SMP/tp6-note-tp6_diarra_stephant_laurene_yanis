@@ -5,8 +5,8 @@
 class FakeJoueur : public Joueur
 {
 public:
-    FakeJoueur(Plateau *p, CouleurCercle c)
-        : Joueur(p, c) {}
+    FakeJoueur(Plateau *p, CouleurCercle c, int id)
+        : Joueur(p, c, id) {}
 
     Coup Jouer() override
     {
@@ -77,8 +77,9 @@ public:
 // }
 TEST(ControleurTest, JouerCoupLimiteA3Tentatives) {
     Plateau p;  // placerCercle retourne toujours false avec le STUB dans PlacerCercle
-
-    FakeJoueur j(&p, CouleurCercle::rouge);
+    int id;
+    
+    FakeJoueur j(&p, CouleurCercle::rouge, id);
     Joueur* js[1] = { &j };
 
     Controleur C(1, &p, js);

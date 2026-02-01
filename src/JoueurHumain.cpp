@@ -2,13 +2,12 @@
 #include "JoueurHumain.hpp"
 
 // constructeur
-JoueurHumain::JoueurHumain(Plateau *p, CouleurCercle c,int id) : Joueur(p, c, id) {
+JoueurHumain::JoueurHumain(Plateau *p, CouleurCercle c, int id) : Joueur(p, c, id) {
     this->plateau = p;
     this->Couleur = c;
     this->idJoueur = id;
 }
 
-JoueurHumain::~JoueurHumain() = default;
 
 Coup JoueurHumain::Jouer()  {
     bool retry = 1;
@@ -60,7 +59,6 @@ Coup JoueurHumain::Jouer()  {
             newCaseCible->setPosX(colonne);
             newCaseCible->setPosY(ligne);
         }
-
     }
     return newCoup;
 }

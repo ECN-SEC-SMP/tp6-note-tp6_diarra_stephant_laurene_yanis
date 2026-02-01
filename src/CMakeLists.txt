@@ -3,6 +3,9 @@ set(SOURCE_FILES    main.cpp
                     Case.cpp
                     Cercle.cpp
                     Plateau.cpp
+                    JoueurHumain.cpp
+                    Controleur.cpp
+                    Coup.cpp
                     ) #Add source files here
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
