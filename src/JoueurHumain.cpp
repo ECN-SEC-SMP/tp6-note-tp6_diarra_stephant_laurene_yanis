@@ -1,6 +1,10 @@
 #include <iostream>
 #include "JoueurHumain.hpp"
 
+JoueurHumain::JoueurHumain() {
+    
+}
+
 Coup JoueurHumain::Jouer() {
     bool retry = 1;
     while(retry){
