@@ -2,6 +2,7 @@ include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
 set(TEST_FILES
                   test_controleur.cpp
+                  tests_bot.cpp
                     ) #Add source files here
 
 add_executable(unit_tests ${TEST_FILES}
@@ -11,8 +12,7 @@ add_executable(unit_tests ${TEST_FILES}
 ../src/Plateau.cpp
 ../src/Case.cpp
 ../src/Cercle.cpp
-
-
+../src/Bot.cpp
 )
 target_link_libraries(
   unit_tests
