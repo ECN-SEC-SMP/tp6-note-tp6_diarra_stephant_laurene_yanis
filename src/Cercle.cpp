@@ -63,38 +63,34 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
     {
         for (int j = Pos_Y; j <= Pos_Y + 4; j++)
         {
-            /*
-                        switch (taille)
+
+            switch (taille)
             {
             case TailleCercle::grande:
-                // if (i == Pos_X && j == Pos_Y)
-                // {
-                //     std::cout << "╚";
-                // }
-                // else if (i == Pos_X && j == Pos_Y + 4)
-                // {
-                //     std::cout << "╝";
-                // }
-                // else if (i == Pos_X + 1 && j == Pos_Y)
-                // {
-                //     std::cout << "╔";
-                // }
-                // else if (i == Pos_X + 1 && j == Pos_Y + 4)
-                // {
-                //     std::cout << "╗";
-                // }
-                // else if (j == Pos_Y || j == Pos_Y + 4)
-                // {
-                //     std::cout << "║";
-                // }
-                // else if (i == Pos_X || i == Pos_X + 1)
-                // {
-                //     std::cout << "══";
-                // }
-                // else
-                // {
-                //     std::cout << "  ";
-                // }
+                if (i == Pos_X && j == Pos_Y)
+                {
+                    std::cout << couleurCase << "╔" << "\033[0m";
+                }
+                else if (i == Pos_X && j == Pos_Y + 4)
+                {
+                    std::cout << couleurCase << "╗" << "\033[0m";
+                }
+                else if (i == Pos_X + 4 && j == Pos_Y)
+                {
+                    std::cout << couleurCase << "╚" << "\033[0m";
+                }
+                else if (i == Pos_X + 4 && j == Pos_Y + 4)
+                {
+                    std::cout << couleurCase << "╝" << "\033[0m";
+                }
+                else if (j == Pos_Y || j == Pos_Y + 4)
+                {
+                    std::cout << couleurCase << "║" << "\033[0m";
+                }
+                else if (i == Pos_X || i == Pos_X + 4)
+                {
+                    std::cout << couleurCase << "══" << "\033[0m";
+                }
                 break;
             case TailleCercle::moyenne:
 
@@ -122,26 +118,15 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
                 // {
                 //     std::cout << couleurCase << "║" << "\033[0m";
                 // }
-                // else if (i == Pos_X + 2 && j == Pos_Y + 2)
-                // {
-                //     std::cout << " ";
-                // }
-                // else
-                // {
-                //     ;
-                // }
-
                 break;
             case TailleCercle::petite:
-                if (i == Pos_X+2  && j == Pos_Y+2)
-                {
-                    std::cout << "\033[" << Pos_X+2 << ";" << Pos_Y+2 << "H";
-                    std::cout << couleurCase << "O" << "\033[0m";
-                }
+                // if (i == Pos_X+2  && j == Pos_Y+2)
+                // {
+                //     std::cout << "\033[" << Pos_X+2 << ";" << Pos_Y+2 << "H";
+                //     std::cout << couleurCase << "O" << "\033[0m";
+                // }
                 break;
             }
-
-            */
             std::cout << "X";
         }
         std::cout << "\033[" << i << ";" << Pos_Y << "H";
