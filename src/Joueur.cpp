@@ -10,7 +10,6 @@ Joueur::Joueur(Plateau* plateau, CouleurCercle c, int id){
 }
 
 //getters
-
 CouleurCercle Joueur::getCouleur()const {
     return this->Couleur;
 }

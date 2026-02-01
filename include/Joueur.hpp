@@ -14,6 +14,8 @@ class Joueur {
     public :
         // Constructeurs
         Joueur(Plateau* plateau, CouleurCercle c, int id);
+
+        // méthode virtuel Jouer à définir dans JoueurHumain et dans Bot
         virtual Coup Jouer()=0; //propose un coup
 
         //getters
