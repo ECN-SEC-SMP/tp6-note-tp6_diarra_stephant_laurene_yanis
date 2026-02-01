@@ -14,3 +14,7 @@ Joueur::Joueur(Plateau* plateau, CouleurCercle c){
 CouleurCercle Joueur::getCouleur(){
     return this->Couleur;
 }
+
+int Joueur::getIdJoueur(){
+    return this->Couleur;
+}

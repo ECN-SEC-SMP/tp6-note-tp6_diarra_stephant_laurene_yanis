@@ -18,6 +18,7 @@ class Joueur {
 
         //getters
         CouleurCercle getCouleur();
+        int getIdJoueur();
 };
 
 
