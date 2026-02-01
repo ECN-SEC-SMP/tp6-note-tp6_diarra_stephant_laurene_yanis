@@ -25,15 +25,13 @@ class Controleur {
 /*-------------------------------------------------------------------------------*/
 // Getters
 /*-------------------------------------------------------------------------------*/
-    int getNbrJoueur();
+    int getNbrJoueur()const;
 
-    Plateau* getPlateau();
+    Plateau* getPlateau() const;
 
-    int getJoueurCourant();
+    int getJoueurCourant() const;
 
-    Joueur* getJoueurs(int i);
-
-    Joueur* getlistJoueurs();
+    Joueur* getJoueurs(int i) const;
 
 /*-------------------------------------------------------------------------------*/
 // Setters
@@ -79,10 +77,11 @@ class Controleur {
  * sinon on demande au joueur de rejouer
  * @param joueur 
  */
-    void jouerCoup(Joueur* joueur); //gestion du coup joué par le joueur
+    bool jouerCoup(Joueur* joueur); //gestion du coup joué par le joueur
 
 /*-------------------------------------------------------------------------------*/
 // Destructeurs
 /*-------------------------------------------------------------------------------*/
-    ~Controleur()= default;
+    ~Controleur()= default; // Ne delete pas plateau ni joueurs : ils ne sont pas possédés ici.
+
 };

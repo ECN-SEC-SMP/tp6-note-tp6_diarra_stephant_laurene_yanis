@@ -37,34 +37,26 @@ Controleur::Controleur(int nbrJoueurs, Plateau *plateau, Joueur *joueurs[])
 // Getters
 /*-------------------------------------------------------------------------------*/
 
-int Controleur::getNbrJoueur()
+int Controleur::getNbrJoueur() const
 {
     return nbrJoueur;
 }
 
-Plateau *Controleur::getPlateau()
+Plateau *Controleur::getPlateau() const
 {
     return plateau;
 }
 
-int Controleur::getJoueurCourant()
+int Controleur::getJoueurCourant() const
 {
     return joueurCouant;
 }
 
-Joueur *Controleur::getJoueurs(int i)
+Joueur *Controleur::getJoueurs(int i) const
 {
     return joueurs[i];
 }
 
-Joueur *Controleur::getlistJoueurs()
-{
-    if (nbrJoueur > 0)
-    {
-        return joueurs[0];
-    }
-    return nullptr;
-}
 /*-------------------------------------------------------------------------------*/
 // Setters
 /*-------------------------------------------------------------------------------*/
@@ -87,41 +79,70 @@ void Controleur::setJoueurCourant(int joueurCourant)
 /*-------------------------------------------------------------------------------*/
 void Controleur::nextJoueur()
 {
+    if (nbrJoueur <= 0)
+        return;
     joueurCouant = (joueurCouant + 1) % nbrJoueur; // passe au joueur suivant de façon circulaire
 }
 
-void Controleur::jouerCoup(Joueur *joueur)
+bool Controleur::jouerCoup(Joueur *joueur)
 {
-    while (true)
+    if (!joueur || !plateau)
+        return false;
+    int maxEssais = 3;
+    for (int essai = 0; essai < maxEssais; essai++)
     {
         Coup propal = joueur->Jouer();                                                      // récupère le coup proposé par le joueur
         bool coupValide = plateau->placerCercle(propal.getCercle(), propal.getCaseCible()); // vérifie et place si valide
         if (coupValide)
         {
-            // Mettre à jour l'affichage global du plateau
-            plateau->Affichage();
-            break;
+            return true; // Coup valide et joué
         }
-        else
-        {
-            cout << "Coup invalide, veuillez rejouer." << endl;
-        }
+        cout << "Coup invalide, veuillez rejouer." << endl;
+        cout << "Il vous reste " << (maxEssais - essai - 1) << " essais." << endl;
     }
+    cout << "Trop de tentatives invalides. Tour annulé." << endl;
+    return false;
 }
+// while (true)
+// {
+//     Coup propal = joueur->Jouer();                                                      // récupère le coup proposé par le joueur
+//     bool coupValide = plateau->placerCercle(propal.getCercle(), propal.getCaseCible()); // vérifie et place si valide
+//     if (coupValide)
+//     {
+//         // Mettre à jour l'affichage global du plateau
+//         plateau->Affichage();
+//         break;
+//     }
+//     else
+//     {
+//         cout << "Coup invalide, veuillez rejouer." << endl;
+//     }
+// }
 
 void Controleur::gererTour()
 {
     if (nbrJoueur <= 0 || plateau == nullptr)
         return;
-
-    cout << "C'est au joueur " << joueurs[joueurCouant]->getIdJoueur() << " de jouer." << endl;
-    jouerCoup(joueurs[joueurCouant]);
-
+    Joueur *jC = joueurs[joueurCouant];
+    if (jC == nullptr)
+    {
+        cout << "Erreur: joueur courant invalide." << endl;
+        nextJoueur();
+        return;
+    }
+    cout << "C'est au joueur " << jC->getIdJoueur() << " de jouer." << endl;
+    bool ok = jouerCoup(jC);
+    if (!ok)
+    {
+        cout << "Le joueur " << jC->getIdJoueur() << " a fait 3 tentatives invalides." << endl;
+        nextJoueur();
+        return;
+    }
     // Vérifier la condition de victoire après le coup
-    if (plateau->victoire(joueurs[joueurCouant]->getCouleur()))
+    if (plateau->victoire(jC->getCouleur()))
     {
         partieTerminee = true;
-        cout << "Le joueur " << joueurs[joueurCouant]->getIdJoueur() << " a gagné !" << endl;
+        cout << "Le joueur " << jC->getIdJoueur() << " a gagné !" << endl;
     }
     else
     {
@@ -140,6 +161,6 @@ void Controleur::runPartie()
     while (!partieTerminee)
     {
         plateau->Affichage(); // affiche le plateau
-        gererTour();          // gère le tour du joueur courant (et avance si nécessaire)
+        gererTour();          // gère le tour du joueur courant: JouerCoup, vérifier victoire, nextJoueur
     }
 }

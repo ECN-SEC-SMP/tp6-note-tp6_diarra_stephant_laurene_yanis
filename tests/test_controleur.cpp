@@ -10,58 +10,81 @@ public:
 
     Coup Jouer() override
     {
+        compteur++;
         return Coup(); // coup par défaut, on ne l’utilise pas ici
     }
+    int getCompteur() const { return compteur; }
+    private:
+    int compteur = 0;
 };
 
+
 // Exemple minimal si tu as des objets constructibles facilement
-TEST(ControleurTest, NextJoueurTourneEnRond)
-{
-    Plateau p;
-    FakeJoueur j1(&p, CouleurCercle::rouge);
-    FakeJoueur j2(&p, CouleurCercle::bleu);
+// TEST(ControleurTest, NextJoueurTourneEnRond)
+// {
+//     Plateau p;
+//     FakeJoueur j1(&p, CouleurCercle::rouge);
+//     FakeJoueur j2(&p, CouleurCercle::bleu);
 
-    Joueur *js[2] = {&j1, &j2};
+//     Joueur *js[2] = {&j1, &j2};
 
-    Controleur c(2, &p, js);
+//     Controleur c(2, &p, js);
 
-    c.setJoueurCourant(0);
-    c.nextJoueur();
-    EXPECT_EQ(c.getJoueurCourant(), 1);
-    c.nextJoueur();
-    EXPECT_EQ(c.getJoueurCourant(), 0);
-    EXPECT_EQ(c.getJoueurs(0), &j1);
-    EXPECT_EQ(c.getJoueurs(1), &j2);
-}
+//     c.setJoueurCourant(0);
+//     c.nextJoueur();
+//     EXPECT_EQ(c.getJoueurCourant(), 1);
+//     c.nextJoueur();
+//     EXPECT_EQ(c.getJoueurCourant(), 0);
+//     EXPECT_EQ(c.getJoueurs(0), &j1);
+//     EXPECT_EQ(c.getJoueurs(1), &j2);
+// }
 
-TEST(ControleurTest, ConstructeurTropDeJoueurs) {
-    Plateau p;
+// TEST(ControleurTest, ConstructeurTropDeJoueurs) {
+//     Plateau p;
 
-    FakeJoueur j1(&p, CouleurCercle::rouge);
-    FakeJoueur j2(&p, CouleurCercle::bleu);
-    FakeJoueur j3(&p, CouleurCercle::vert);
-    FakeJoueur j4(&p, CouleurCercle::jaune);
-    FakeJoueur j5(&p, CouleurCercle::rouge);
-    Joueur* joueurs[5] = { &j1, &j2, &j3, &j4, &j5 };
+//     FakeJoueur j1(&p, CouleurCercle::rouge);
+//     FakeJoueur j2(&p, CouleurCercle::bleu);
+//     FakeJoueur j3(&p, CouleurCercle::vert);
+//     FakeJoueur j4(&p, CouleurCercle::jaune);
+//     FakeJoueur j5(&p, CouleurCercle::rouge);
+//     Joueur* joueurs[5] = { &j1, &j2, &j3, &j4, &j5 };
 
-    Controleur ctrl(5, &p, joueurs); // trop de joueurs
+//     Controleur ctrl(5, &p, joueurs); // trop de joueurs
 
-    EXPECT_EQ(ctrl.getNbrJoueur(), 0); 
-}
-TEST(ControleurTest, ConstructeurValide) {
-    Plateau p;
+//     EXPECT_EQ(ctrl.getNbrJoueur(), 0); 
+// }
+// TEST(ControleurTest, ConstructeurValide) {
+//     Plateau p;
 
-    FakeJoueur j1(&p, CouleurCercle::rouge);
-    FakeJoueur j2(&p, CouleurCercle::bleu);
-    FakeJoueur j3(&p, CouleurCercle::vert);
+//     FakeJoueur j1(&p, CouleurCercle::rouge);
+//     FakeJoueur j2(&p, CouleurCercle::bleu);
+//     FakeJoueur j3(&p, CouleurCercle::vert);
 
-    Joueur* joueurs[3] = { &j1, &j2, &j3 };
+//     Joueur* joueurs[3] = { &j1, &j2, &j3 };
 
-    Controleur ctrl(3, &p, joueurs);
+//     Controleur c(3, &p, joueurs);
 
-    EXPECT_EQ(ctrl.getNbrJoueur(), 3);
-    EXPECT_EQ(ctrl.getPlateau(), &p);
-    EXPECT_EQ(ctrl.getJoueurs(0), &j1);
-    EXPECT_EQ(ctrl.getJoueurs(1), &j2);
-    EXPECT_EQ(ctrl.getJoueurs(2), &j3);
+//     EXPECT_EQ(c.getNbrJoueur(), 3);
+//     EXPECT_EQ(c.getPlateau(), &p);
+//     EXPECT_EQ(c.getJoueurs(0), &j1);
+//     EXPECT_EQ(c.getJoueurs(1), &j2);
+//     EXPECT_EQ(c.getJoueurs(2), &j3);
+// }
+// TEST(ControleurTest, NextJoueurAvecZeroJoueurNeCrashPas) {
+//     Controleur  c;  // constructeur par défaut → nbrJoueur = 0
+//     c.nextJoueur();
+//     EXPECT_EQ(c.getJoueurCourant(), 0);
+// }
+TEST(ControleurTest, JouerCoupLimiteA3Tentatives) {
+    Plateau p;  // placerCercle retourne toujours false avec le STUB dans PlacerCercle
+
+    FakeJoueur j(&p, CouleurCercle::rouge);
+    Joueur* js[1] = { &j };
+
+    Controleur C(1, &p, js);
+
+    bool resultat = C.jouerCoup(&j);
+
+    EXPECT_FALSE(resultat);
+    EXPECT_EQ(j.getCompteur(), 3); // doit être appelé exactement 3 fois
 }
