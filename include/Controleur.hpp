@@ -49,9 +49,10 @@ class Controleur {
 /**
  * @brief gère le déroulement de la partie
  * boucle prinicpale de la partie
+ * appelle un premier joueur
  * Affiche plateau,
  * appèle gérerTour() tant que la partie n'est pas terminée
- * vérifier s'il y a victoire après chaque tour
+ * qui vérifie s'il y a victoire après chaque tour
  * appelle le joueur suivant
  */
     void runPartie();

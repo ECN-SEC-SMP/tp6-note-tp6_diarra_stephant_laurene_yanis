@@ -9,16 +9,16 @@ class Joueur {
     protected:
         CouleurCercle  Couleur;
         Plateau* plateau;
+        int idJoueur;
 
     public :
         // Constructeurs
-        Joueur(Plateau* plateau, CouleurCercle c);
-
+        Joueur(Plateau* plateau, CouleurCercle c, int id);
         virtual Coup Jouer()=0; //propose un coup
 
         //getters
-        CouleurCercle getCouleur();
-        int getIdJoueur();
+        CouleurCercle getCouleur() const;
+        int getIdJoueur()const ;
 };
 
 
