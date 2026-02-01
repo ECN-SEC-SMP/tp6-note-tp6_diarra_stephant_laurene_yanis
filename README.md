@@ -32,6 +32,9 @@
 // Constructeurs
 Joueur(Plateau* plateau, CouleurCercle c, int id);
 
+// Destructeur
+virtual ~Joueur() = default;
+
 // Méthode virtuel Jouer à définir dans JoueurHumain et dans Bot
 virtual Coup Jouer()=0; //propose un coup
 

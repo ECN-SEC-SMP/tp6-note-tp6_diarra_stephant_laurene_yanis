@@ -1,0 +1,20 @@
+<map id="include/TailleCercle.hpp" name="include/TailleCercle.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="50,5,226,32"/>
+<area shape="rect" id="node2" href="$Plateau_8cpp.html" title=" " alt="" coords="5,304,127,331"/>
+<area shape="rect" id="node3" href="$Cercle_8hpp.html" title=" " alt="" coords="232,80,375,107"/>
+<area shape="rect" id="node4" href="$Bot_8cpp.html" title=" " alt="" coords="920,453,1015,480"/>
+<area shape="rect" id="node5" href="$Case_8cpp.html" title=" " alt="" coords="103,229,207,256"/>
+<area shape="rect" id="node6" href="$Cercle_8cpp.html" title=" " alt="" coords="173,155,287,181"/>
+<area shape="rect" id="node7" href="$Case_8hpp.html" title=" " alt="" coords="311,155,445,181"/>
+<area shape="rect" id="node8" href="$Coup_8hpp.html" title=" " alt="" coords="465,229,600,256"/>
+<area shape="rect" id="node18" href="$Plateau_8hpp.html" title=" " alt="" coords="283,229,433,256"/>
+<area shape="rect" id="node9" href="$Controleur_8cpp.html" title=" " alt="" coords="295,453,434,480"/>
+<area shape="rect" id="node10" href="$Coup_8cpp.html" title=" " alt="" coords="932,304,1037,331"/>
+<area shape="rect" id="node11" href="$Joueur_8hpp.html" title=" " alt="" coords="462,304,603,331"/>
+<area shape="rect" id="node12" href="$Joueur_8cpp.html" title=" " alt="" coords="663,379,775,405"/>
+<area shape="rect" id="node13" href="$main_8cpp.html" title=" " alt="" coords="164,453,269,480"/>
+<area shape="rect" id="node14" href="$Bot_8hpp.html" title=" " alt="" coords="799,379,922,405"/>
+<area shape="rect" id="node15" href="$Controleur_8hpp.html" title=" " alt="" coords="253,379,421,405"/>
+<area shape="rect" id="node16" href="$JoueurHumain_8hpp.html" title=" " alt="" coords="445,379,639,405"/>
+<area shape="rect" id="node17" href="$JoueurHumain_8cpp.html" title=" " alt="" coords="460,453,624,480"/>
+</map>

@@ -2,6 +2,13 @@
 #include "JoueurHumain.hpp"
 
 // constructeur
+
+/**
+ * @brief Constructeur de JoueurHumain
+ *
+ * Initialise un joueur humain en appelant le constructeur
+ * de la classe mère Joueur.
+ */
 JoueurHumain::JoueurHumain(Plateau *p, CouleurCercle c, int id) : Joueur(p, c, id) {
     this->plateau = p;
     this->Couleur = c;
@@ -9,6 +16,22 @@ JoueurHumain::JoueurHumain(Plateau *p, CouleurCercle c, int id) : Joueur(p, c, i
 }
 
 
+
+
+/**
+ * @brief Méthode permettant au joueur humain de jouer un coup
+ *
+ * La méthode demande à l'utilisateur :
+ * - la position de la case (ligne, colonne)
+ * - la taille du cercle (S, M ou L)
+ *
+ * Elle vérifie :
+ * - que les coordonnées sont valides
+ * - que la taille est correcte
+ * - que la case est disponible pour la taille choisie
+ *
+ * @return Coup valide créé à partir des entrées utilisateur
+ */
 Coup JoueurHumain::Jouer()  {
     bool retry = 1;
     Cercle* newCercle;
