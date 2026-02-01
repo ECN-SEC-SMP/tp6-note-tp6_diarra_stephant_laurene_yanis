@@ -1,7 +1,7 @@
 #pragma once
 
 enum TailleCercle {
-    petite,
+    petite = 0,
     moyenne,
-    grande
+    grande,
 };

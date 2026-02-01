@@ -1,7 +1,7 @@
 #pragma once
 
 enum CouleurCercle {
-    rouge,
+    rouge = 0,
     bleu,
     jaune,
     vert
