@@ -7,8 +7,6 @@ class JoueurHumain : public Joueur
 private:
 public:
     Coup Jouer() override;
-    JoueurHumain( Plateau *p, CouleurCercle c,int id)
-        : Joueur(p, c, id)
-    {
-    }
+    JoueurHumain( Plateau *p, CouleurCercle c,int id);
+    ~JoueurHumain() = default;
 };
