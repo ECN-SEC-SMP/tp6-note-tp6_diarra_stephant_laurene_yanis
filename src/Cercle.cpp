@@ -65,13 +65,13 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
         std::cout << "\033[" << Pos_X + 1 << ";" << Pos_Y + 1 << "H" << "X";
         for (int i = Pos_X + 1; i <= Pos_X + 4; i++)
         {
-            for (int j = Pos_Y + 1; j <= Pos_Y + 5; j++)
+            for (int j = Pos_Y + 1; j <= Pos_Y + 8; j++)
             {
                 if (i == Pos_X + 2 && j == Pos_Y + 1)
                 {
                     std::cout << couleurCase << "╔" << "\033[0m";
                 }
-                else if (i == Pos_X + 2 && j == Pos_Y + 5)
+                else if (i == Pos_X + 2 && j == Pos_Y + 8)
                 {
                     std::cout << couleurCase << "╗" << "\033[0m";
                 }
@@ -79,21 +79,17 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
                 {
                     std::cout << couleurCase << "╚" << "\033[0m";
                 }
-                else if (i == Pos_X + 4 && j == Pos_Y + 5)
+                else if (i == Pos_X + 4 && j == Pos_Y + 8)
                 {
                     std::cout << couleurCase << "╝" << "\033[0m";
                 }
-                else if ((j == Pos_Y + 1 || j == Pos_Y + 5) && i == Pos_X + 3)
+                else if ((j == Pos_Y + 1 || j == Pos_Y + 8) && i == Pos_X + 3)
                 {
                     std::cout << couleurCase << "║" << "\033[0m";
                 }
                 else if (i == Pos_X + 2 || i == Pos_X + 4)
                 {
-                    std::cout << couleurCase << "══" << "\033[0m";
-                }
-                else if (i == Pos_X + 3 && (j == Pos_Y + 2 || j == Pos_Y + 3 || j == Pos_Y + 4))
-                {
-                    std::cout << "  " << "\033[0m";
+                    std::cout << couleurCase << "═" << "\033[0m";
                 }
                 else
                 {
@@ -102,19 +98,18 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
             }
             std::cout << "\033[" << i << ";" << Pos_Y + 1 << "H";
         }
-
         break;
     case TailleCercle::grande:
         std::cout << "\033[" << Pos_X << ";" << Pos_Y << "H";
         for (int i = Pos_X; i <= Pos_X + 5; i++)
         {
-            for (int j = Pos_Y; j <= Pos_Y + 5; j++)
+            for (int j = Pos_Y; j <= Pos_Y + 9; j++)
             {
                 if (i == Pos_X + 5 && j == Pos_Y)
                 {
                     std::cout << couleurCase << "╚" << "\033[0m";
                 }
-                else if (i == Pos_X + 5 && j == Pos_Y + 5)
+                else if (i == Pos_X + 5 && j == Pos_Y + 9)
                 {
                     std::cout << couleurCase << "╝" << "\033[0m";
                 }
@@ -122,21 +117,21 @@ void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
                 {
                     std::cout << couleurCase << "╔" << "\033[0m";
                 }
-                else if (i == Pos_X + 1 && j == Pos_Y + 5)
+                else if (i == Pos_X + 1 && j == Pos_Y + 9)
                 {
                     std::cout << couleurCase << "╗" << "\033[0m";
                 }
-                else if (j == Pos_Y || j == Pos_Y + 5)
+                else if (j == Pos_Y || j == Pos_Y + 9)
                 {
                     std::cout << couleurCase << "║" << "\033[0m";
                 }
                 else if (i == Pos_X + 5 || i == Pos_X + 1)
                 {
-                    std::cout << couleurCase << "══" << "\033[0m";
+                    std::cout << couleurCase << "═" << "\033[0m";
                 }
                 else
                 {
-                    std::cout << "  " << "\033[0m";
+                    std::cout << " " << "\033[0m";
                 }
             }
             std::cout << "\033[" << i << ";" << Pos_Y << "H";

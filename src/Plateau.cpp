@@ -99,6 +99,8 @@ void Plateau::Affichage()
               << std::endl
               << std::endl
               << std::endl
+              << std::endl
+              << std::endl
               << std::endl;
 }
 
