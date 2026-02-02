@@ -49,7 +49,7 @@ int getIdJoueur()const ;
 ```cpp
 // Définition de la fonction virtuelle
 Coup Jouer() override;
-
+ 
 // Constructeur
 JoueurHumain( Plateau *p, CouleurCercle c,int id);
 
