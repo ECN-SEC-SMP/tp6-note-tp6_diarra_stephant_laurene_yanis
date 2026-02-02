@@ -14,7 +14,7 @@ int main()
 	Plateau plateau;
 
 	//Affichage du plateau à l'état initial
-	plateau.Affichage();
+	//plateau.Affichage();
 
 	//Création des joueurs(humains, inclure bot quant classe prete)
 	JoueurHumain j1(&plateau, CouleurCercle::bleu, 1);
