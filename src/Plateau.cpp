@@ -4,6 +4,7 @@
 #include "Case.hpp"
 #include "CouleurCercle.hpp"
 #include "TailleCercle.hpp"
+#include "joueur.hpp"
 #include "Plateau.hpp"
 
 // Constructeurs
@@ -110,8 +111,68 @@ bool Plateau::placerCercle(Cercle *cercle, Case *cible)
     return false;
 }
 
+/**
+ * @brief Vérifie s'il y a empilement de trois cercles de la meme couleur sur une case
+ *
+ * @return true
+ * @return false
+ */
+bool Plateau::victoireEmpilement(CouleurCercle couleur)
+{
+    bool empilement;
+    Case *laCase;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
+            uint8_t count[4] = {0};
+            for (Cercle *cercle : laCase->getCercles()) // parcours des cercles dans la case
+            {
+                if (cercle)
+                {
+                    count[cercle->getCouleur()]++;
+                    if (count[cercle->getCouleur()] == 3)
+                    {
+                        empilement = true;
+                        return empilement;
+                    }
+                }
+            }
+        }
+    }
+}
+bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
+{
+    
+
+
+}
+bool Plateau::victoireAlignementOrdonnee(CouleurCercle couleur){
+
+}
 bool Plateau::victoire(CouleurCercle couleur)
 {
-    // TODO: STUB
-    return false;
+    bool victoire;
+    if (victoireEmpilement(couleur))
+    {
+        std::cout << "Le cercle de couleur: " << couleur << "vient de réaliser un empilement de ses trois cercles." << std::endl;
+        victoire = true;
+    }
+    if (victoireAlignementIdentique(couleur))
+    {
+        std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles de meme taille." << std::endl;
+        victoire = true;
+    }
+    if(victoireAlignementOrdonnee(couleur)){
+        std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles ordonnes." << std::endl;
+        victoire = true;
+
+    }
+    else{
+        victoire= false;
+    }
+    std::cout << "la couleur" << couleur << "a gagné la partie" << std::endl;
+
+    return victoire;
 }

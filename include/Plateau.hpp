@@ -18,6 +18,9 @@ public:
     // Méthodes
     void Affichage();
     bool placerCercle(Cercle* cercle, Case* cible);
+    bool victoireEmpilement(CouleurCercle couleur);
+    bool victoireAlignementIdentique(CouleurCercle couleur);
+    bool victoireAlignementOrdonnee(CouleurCercle couleur);
     bool victoire(CouleurCercle couleur);
 
     // Destructeurs
