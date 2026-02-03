@@ -103,21 +103,7 @@ bool Controleur::jouerCoup(Joueur *joueur)
     cout << "Trop de tentatives invalides. Tour annulé." << endl;
     return false;
 }
-// while (true)
-// {
-//     Coup propal = joueur->Jouer();                                                      // récupère le coup proposé par le joueur
-//     bool coupValide = plateau->placerCercle(propal.getCercle(), propal.getCaseCible()); // vérifie et place si valide
-//     if (coupValide)
-//     {
-//         // Mettre à jour l'affichage global du plateau
-//         plateau->Affichage();
-//         break;
-//     }
-//     else
-//     {
-//         cout << "Coup invalide, veuillez rejouer." << endl;
-//     }
-// }
+
 
 void Controleur::gererTour()
 {
