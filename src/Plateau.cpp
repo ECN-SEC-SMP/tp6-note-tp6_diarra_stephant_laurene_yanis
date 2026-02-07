@@ -4,7 +4,7 @@
 #include "Case.hpp"
 #include "CouleurCercle.hpp"
 #include "TailleCercle.hpp"
-#include "joueur.hpp"
+#include "Joueur.hpp"
 #include "Plateau.hpp"
 
 // Constructeurs
@@ -102,6 +102,10 @@ void Plateau::Affichage()
               << std::endl
               << std::endl
               << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
+              << std::endl
               << std::endl;
 }
 
@@ -126,7 +130,7 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
         for (int j = 0; j < 5; j++)
         {
             laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
-            uint8_t count[4] = {0};
+            int count[4] = {0};
             for (Cercle *cercle : laCase->getCercles()) // parcours des cercles dans la case
             {
                 if (cercle)
@@ -144,12 +148,9 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
 }
 bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
 {
-    
-
-
 }
-bool Plateau::victoireAlignementOrdonnee(CouleurCercle couleur){
-
+bool Plateau::victoireAlignementOrdonnee(CouleurCercle couleur)
+{
 }
 bool Plateau::victoire(CouleurCercle couleur)
 {
@@ -164,13 +165,14 @@ bool Plateau::victoire(CouleurCercle couleur)
         std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles de meme taille." << std::endl;
         victoire = true;
     }
-    if(victoireAlignementOrdonnee(couleur)){
+    if (victoireAlignementOrdonnee(couleur))
+    {
         std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles ordonnes." << std::endl;
         victoire = true;
-
     }
-    else{
-        victoire= false;
+    else
+    {
+        victoire = false;
     }
     std::cout << "la couleur" << couleur << "a gagné la partie" << std::endl;
 
