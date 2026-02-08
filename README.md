@@ -244,5 +244,14 @@ Plateau::victoireAlignementIdentique(CouleurCercle couleur)
 Plateau::victoireAlignementOrdonnee(CouleurCercle couleur)
 ```
 
+## Conclusion
+
+Ce projet nous aura permis de mettre en application une grande partie des connaissances vues en cours, ainsi que dans les différents TP.
+
+Des notions variées ont été abordées, avec pour thème central la gestion et l'utilisation des classes. Nous avons également mis en oeuvre des notions d'héritages, de tests unitaires (SEC1), de documentation doxygen, ainsi que des notions de vecteurs et d'arrays.
+
+Certains imprévus n'ont pas pu permettre de rendre le projet à temps pour le 1/02/2026. Néanmoins, nous sommes parvenus à produire une solution fonctionnelle du cahier des charges.
+
+Ce travail nous sera utile pour la suite de notre formation, notamment dans les futurs modules demandant d'utiliser le langage C++.
 
 
