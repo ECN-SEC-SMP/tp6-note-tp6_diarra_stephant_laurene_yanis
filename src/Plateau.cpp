@@ -123,26 +123,27 @@ bool Plateau::placerCercle(Cercle *cercle, Case *cible)
  */
 bool Plateau::victoireEmpilement(CouleurCercle couleur)
 {
-    bool empilement= false;
+    bool empilement = false;
     Case *laCase;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 3; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 3; j++)
         {
             laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
-            int nb= 0;
-            std::array<Cercle*, 3> cercles = laCase->getCercles();
-            for (Cercle* cercle : cercles) // parcours des cercles dans la case
+            int nb = 0;
+            std::array<Cercle *, 3> cercles = laCase->getCercles();
+            for (Cercle *cercle : cercles) // parcours des cercles dans la case
             {
-                if (cercle && cercle->getCouleur() ==couleur)
+                if (cercle && cercle->getCouleur() == couleur)
                 {
                     nb++;
-                    if (nb==3){
-                        empilement= true;
+                    if (nb == 3)
+                    {
+                        empilement = true;
                     }
                 }
             }
-        }    
+        }
     }
     return empilement;
 }
@@ -154,9 +155,76 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
  */
 bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
 {
-    bool victoire;
+    bool victoire = false;
+    // Pour chaque taille : 0=petit, 1=moyen, 2=grand
+    for (int taille = 0; taille < 3; ++taille)
+    {
+        // ===== LIGNES =====
+        for (int y = 1; y <= 3; ++y)
+        {
+            Cercle* c1 = getCase(1, y)->getCercles()[taille];
+            Cercle* c2 = getCase(2, y)->getCercles()[taille];
+            Cercle* c3 = getCase(3, y)->getCercles()[taille];
 
+            if (c1 && c2 && c3 &&
+                c1->getCouleur() == couleur &&
+                c2->getCouleur() == couleur &&
+                c3->getCouleur() == couleur)
+            {
+                victoire= true;
+            }
+        }
+
+        // ===== COLONNES =====
+        for (int x = 1; x <= 3; ++x)
+        {
+            Cercle* c1 = getCase(x, 1)->getCercles()[taille];
+            Cercle* c2 = getCase(x, 2)->getCercles()[taille];
+            Cercle* c3 = getCase(x, 3)->getCercles()[taille];
+
+            if (c1 && c2 && c3 &&
+                c1->getCouleur() == couleur &&
+                c2->getCouleur() == couleur &&
+                c3->getCouleur() == couleur)
+            {
+                victoire= true;
+            }
+        }
+
+        // ===== DIAGONALE PRINCIPALE ↘ ===== (1,1) (2,2) (3,3)
+        {
+            Cercle* c1 = getCase(1, 1)->getCercles()[taille];
+            Cercle* c2 = getCase(2, 2)->getCercles()[taille];
+            Cercle* c3 = getCase(3, 3)->getCercles()[taille];
+
+            if (c1 && c2 && c3 &&
+                c1->getCouleur() == couleur &&
+                c2->getCouleur() == couleur &&
+                c3->getCouleur() == couleur)
+            {
+                victoire= true;
+            }
+        }
+
+        // ===== DIAGONALE SECONDAIRE ↙ ===== (3,1) (2,2) (1,3)
+        {
+            Cercle* c1 = getCase(3, 1)->getCercles()[taille];
+            Cercle* c2 = getCase(2, 2)->getCercles()[taille];
+            Cercle* c3 = getCase(1, 3)->getCercles()[taille];
+
+            if (c1 && c2 && c3 &&
+                c1->getCouleur() == couleur &&
+                c2->getCouleur() == couleur &&
+                c3->getCouleur() == couleur)
+            {
+                victoire= true;
+            }
+        }
+    }
+
+    return victoire;
 }
+
 
 /**
  * @brief Vérifie l'alignement de 3 cercles de meme couleur de taille ascendante ou
