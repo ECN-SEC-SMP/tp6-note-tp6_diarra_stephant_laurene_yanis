@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-using namespace std;
 
 #include "Cercle.hpp"
 #include "Case.hpp"
@@ -8,6 +6,7 @@ using namespace std;
 class Coup {
 
 private:
+    Case *origine;
     Cercle *cercle;
     Case *caseCible;
 
@@ -17,10 +16,11 @@ public:
 // Constructeurs
 /*-------------------------------------------------------------------------------*/
     Coup();
-    Coup(Cercle* cercle, Case* caseCible);
+    Coup(Case* origine, Cercle* cercle, Case* caseCible);
 //-------------------------------------------------------------------------------*/
 // Accesseurs
 /*-------------------------------------------------------------------------------*/
+    Case* getOrigine();
     Cercle* getCercle();
     Case* getCaseCible();
 

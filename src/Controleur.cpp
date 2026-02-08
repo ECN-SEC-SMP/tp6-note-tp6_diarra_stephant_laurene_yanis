@@ -92,7 +92,7 @@ bool Controleur::jouerCoup(Joueur *joueur)
     for (int essai = 0; essai < maxEssais; essai++)
     {
         Coup propal = joueur->Jouer();                                                      // récupère le coup proposé par le joueur
-        bool coupValide = plateau->placerCercle(propal.getCercle(), propal.getCaseCible()); // vérifie et place si valide
+        bool coupValide = plateau->placerCercle(propal); // vérifie et place si valide
         if (coupValide)
         {
             return true; // Coup valide et joué

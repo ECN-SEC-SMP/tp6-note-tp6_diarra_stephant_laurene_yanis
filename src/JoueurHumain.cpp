@@ -79,7 +79,7 @@ Coup JoueurHumain::Jouer()  {
     std::cout<<"Votre coup est bien enregistré"<<std::endl;
     Cercle* c1 = plateau->getCase(colonne, ligne)->getCercles()[newTailleCercle];
     Case* c2 = plateau->getCase(colonne, ligne);
-    Coup newCoup( c1, c2);
+    Coup newCoup(plateau->getCase(colonne, ligne), c1, c2);
 
     return newCoup;
 }
