@@ -131,9 +131,10 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
         {
             laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
             int nb= 0;
-            for (Cercle *cercle : laCase->getCercles()) // parcours des cercles dans la case
+            std::array<Cercle*, 3> cercles = laCase->getCercles();
+            for (Cercle* cercle : cercles) // parcours des cercles dans la case
             {
-                if (cercle && cercle->getCercles()==couleur)
+                if (cercle && cercle->getCouleur() ==couleur)
                 {
                     nb++;
                     if (nb==3){
