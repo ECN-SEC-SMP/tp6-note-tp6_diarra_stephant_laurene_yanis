@@ -185,9 +185,101 @@ Cercle::Cercle(TailleCercle taille, CouleurCercle couleur)
 void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
 ```
 
-## Controleur xx
+## Controleur Diarra
+#### Role général
+La classe Controleur joue le rôle d’orchestrateur de la partie.
+Elle assure la coordination entre: le plateau, les joueurs, la gestion des tours, la détection des conditions de victoire.
+Elle constitue le cœur de la logique de jeu.
+```cpp
+class Controleur {
+    private:
+    int nbrJoueur;
+    Plateau *plateau;
+    int joueurCouant;
+    Joueur * joueurs[ 4 ];
+    bool partieTerminee;
+    public:
+    Controleur();
+    Controleur(int nbrJoueurs, Plateau* plateau, Joueur* joueurs[]);
+    int getNbrJoueur()const;
+    Plateau* getPlateau() const;
+    int getJoueurCourant() const;
+    Joueur* getJoueurs(int i) const;
+    void setNbrJoueur(int nbrJoueurs);
+    void setPlateau(Plateau* plateau);
+    void setJoueurCourant(int joueurCourant);
+/**
+ * @brief gère le déroulement de la partie boucle prinicpale de la partie appelle un premier joueur,
+* appèle gérerTour() tant que la partie n'est pas terminée, qui vérifie s'il y a victoire après chaque tour et appelle le joueur suivant
+ */
+    void runPartie();
+/**
+ * @brief Sélectionne le joueur suivant
+ */
+    void nextJoueur();
+/**
+ * @brief récupére l'action du joueur courant valide l'action via le plateau met à jour * l'état de la partie vérifie la condition de fin de partie passe au joueur suivant
+ */
+    void gererTour();
+/**
+ * @brief Vérifie via le plateau si le coup proposé par le joueur est valide .Si le coup est valide, le coup est joué sur le plateau sinon on demande au joueur de rejouer
+ * @param joueur 
+ */
+    bool jouerCoup(Joueur* joueur); //gestion du coup joué par le joueur
+    ~Controleur()= default; // Ne delete pas plateau ni joueurs : ils ne sont pas possédés ici.
+};
+```
+Le contrôleur ne contient aucune logique de règles métier.
+Il délègue les règles de placement → Plateau, la décision du coup → Joueur, l'affichage → Plateau. Pour cette raison, le traitement des 3 conditions de victoires ont été délégué au Plateau qui a accés au plateau, aux cases le constituant, ce qui facilite l'accés aux cercles.
+Cela respecte le principe de séparation des responsabilités.
 
-## Coup xx
+#### Tests unitaires
+Le contrôleur a été testé avec GoogleTest sur :
+- La rotation correcte des joueurs
+- Le comportement en cas de trop de joueurs
+- La limitation à 3 tentatives
+- La gestion correcte des cas sans joueur
+- La détection de victoire et arrêt de partie
+#### Points forts de l’implémentation
+- Architecture claire
+- Bonne séparation logique
+- Gestion des erreurs simple et robuste
+- Tests unitaires fonctionnels
+## Coup Diarra
+La classe Coup a été ajoutée lors de l’implémentation de la classe Controleur.
+En effet, lors de la conception du contrôleur, il est apparu plus propre et plus cohérent de représenter un coup de manière structurée plutôt que de manipuler séparément :
+- une case d’origine,
+- un cercle,
+- une case cible.
+La classe Coup encapsule ainsi toutes les informations nécessaires à l’exécution d’un déplacement.
+```cpp
+class Coup {
+private:
+    Case *origine;
+    Cercle *cercle;
+    Case *caseCible;
+public:
+    Coup();
+    Coup(Case* origine, Cercle* cercle, Case* caseCible);
+    Case* getOrigine();
+    Cercle* getCercle();
+    Case* getCaseCible();
+};
+```
+Un objet Coup représente une action complète effectuée par un joueur :
+- origine : la case depuis laquelle le cercle est déplacé
+- cercle : le cercle concerné par le déplacement
+- caseCible : la case vers laquelle le cercle est déplacé
+
+
+Cette structure permet au contrôleur de manipuler un coup comme une entité unique.
+Le contrôleur :
+* Demande au joueur de proposer un coup via joueur->Jouer()
+* Reçoit un objet Coup
+* Transmet cet objet à plateau->placerCercle(coup)
+* Vérifie la validité et exécute le déplacement
+
+Ainsi, la classe Coup agit comme un intermédiaire entre : la décision du joueur et l’exécution par le plateau
 
 ## Joueur Laurène
 ```cpp
