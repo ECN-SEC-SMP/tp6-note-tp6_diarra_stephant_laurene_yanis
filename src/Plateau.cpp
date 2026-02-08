@@ -116,64 +116,80 @@ bool Plateau::placerCercle(Cercle *cercle, Case *cible)
 }
 
 /**
- * @brief Vérifie s'il y a empilement de trois cercles de la meme couleur sur une case
+ * @brief Vérifie la condition d'empilement de 3 cercles de meme couleur
  *
  * @return true
  * @return false
  */
 bool Plateau::victoireEmpilement(CouleurCercle couleur)
 {
-    bool empilement;
+    bool empilement= false;
     Case *laCase;
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
         {
             laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
-            int count[4] = {0};
+            int nb= 0;
             for (Cercle *cercle : laCase->getCercles()) // parcours des cercles dans la case
             {
-                if (cercle)
+                if (cercle && cercle->getCercles()==couleur)
                 {
-                    count[cercle->getCouleur()]++;
-                    if (count[cercle->getCouleur()] == 3)
-                    {
-                        empilement = true;
-                        return empilement;
+                    nb++;
+                    if (nb==3){
+                        empilement= true;
                     }
                 }
             }
-        }
+        }    
     }
+    return empilement;
 }
+/**
+ * @brief Vérifie l'alignement de 3 cercles identiques
+ *
+ * @return true
+ * @return false
+ */
 bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
 {
+    bool victoire;
+
 }
+
+/**
+ * @brief Vérifie l'alignement de 3 cercles de meme couleur de taille ascendante ou
+ *
+ * @return true
+ * @return false
+ */
 bool Plateau::victoireAlignementOrdonnee(CouleurCercle couleur)
 {
 }
+/**
+ * @brief Vérifie si l'une des cnditions de victoire est ok
+ *
+ * @return true
+ * @return false
+ */
 bool Plateau::victoire(CouleurCercle couleur)
 {
-    bool victoire;
     if (victoireEmpilement(couleur))
     {
         std::cout << "Le cercle de couleur: " << couleur << "vient de réaliser un empilement de ses trois cercles." << std::endl;
-        victoire = true;
+        return true;
     }
     if (victoireAlignementIdentique(couleur))
     {
         std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles de meme taille." << std::endl;
-        victoire = true;
+        return true;
     }
     if (victoireAlignementOrdonnee(couleur))
     {
         std::cout << "La couleur: " << couleur << "vient de réaliser un alignement de ses 3 cercles ordonnes." << std::endl;
-        victoire = true;
+        return true;
     }
-    else
-    {
-        victoire = false;
-    }
+    return false;
     std::cout << "la couleur" << couleur << "a gagné la partie" << std::endl;
 
     return victoire;
