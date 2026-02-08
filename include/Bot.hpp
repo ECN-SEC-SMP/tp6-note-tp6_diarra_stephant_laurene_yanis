@@ -16,14 +16,7 @@ private:
     Coup analyserAlignement(const std::vector<Case*>& cases);
     Coup verifierMenaceEmpilement();
     
-    /**
-     * @brief Trouve un cercle disponible dans la réserve du joueur
-     * @param taille Taille du cercle recherché
-     * @param origine [OUT] Pointeur vers la case d'origine (sera modifié)
-     * @return Pointeur vers le cercle trouvé, ou nullptr
-     */
-    Cercle* possedeCercle(TailleCercle taille, Case** origine);
-
+    
     /**
      * @brief Structure pour représenter une séquence de coups planifiés
      */
@@ -92,4 +85,12 @@ public:
      * Priorité : 1) Parer menaces immédiates  2) Planifier victoire en 3 coups  3) Coup par défaut
      */
     Coup Jouer() override;
+
+    /**
+     * @brief Trouve un cercle disponible dans la réserve du joueur
+     * @param taille Taille du cercle recherché
+     * @param origine [OUT] Pointeur vers la case d'origine (sera modifié)
+     * @return Pointeur vers le cercle trouvé, ou nullptr
+     */
+    Cercle* possedeCercle(TailleCercle taille, Case** origine);
 };

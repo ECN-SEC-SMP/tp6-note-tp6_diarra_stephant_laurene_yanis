@@ -1,6 +1,7 @@
 set(SOURCE_FILES    main.cpp
                     Joueur.cpp
                     Case.cpp
+                    Bot.cpp
                     Cercle.cpp
                     Plateau.cpp
                     JoueurHumain.cpp
