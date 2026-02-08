@@ -136,7 +136,6 @@ bool Plateau::placerCercle(Coup coup)
 bool Plateau::victoireEmpilement(CouleurCercle couleur)
 {
     bool empilement = false;
-    Case *laCase;
     for (int i = 1; i <= 3; i++)
     {
         for (int j = 1; j <= 3; j++)
