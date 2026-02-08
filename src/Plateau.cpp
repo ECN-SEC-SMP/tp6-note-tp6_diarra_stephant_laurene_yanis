@@ -110,18 +110,20 @@ void Plateau::Affichage()
 
 bool Plateau::placerCercle(Coup coup)
 {
-    if(coup.getOrigine() == nullptr || coup.getCercle() == nullptr || coup.getCaseCible() == nullptr) {
+    if (coup.getOrigine() == nullptr || coup.getCercle() == nullptr || coup.getCaseCible() == nullptr)
+    {
         return false;
     }
 
-    if(coup.getCaseCible()->getCercles()[coup.getCercle()->getTaille()] != nullptr) {
+    if (coup.getCaseCible()->getCercles()[coup.getCercle()->getTaille()] != nullptr)
+    {
         return false;
     }
 
-    //déplacer le cercle
+    // déplacer le cercle
     coup.getOrigine()->setCercles(nullptr, coup.getCercle()->getTaille());
     coup.getCaseCible()->setCercles(coup.getCercle(), coup.getCercle()->getTaille());
-    
+
     return true;
 }
 
@@ -135,11 +137,14 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
 {
     bool empilement = false;
     Case *laCase;
-    for (int i = 0; i < 3; i++)
+    for (int i = 1; i <= 3; i++)
     {
-        for (int j = 0; j < 3; j++)
+        for (int j = 1; j <= 3; j++)
         {
-            laCase = this->getCase(i, j); // parcours de toutes les cases du tableau
+            Case *laCase = getCase(i, j); // parcours de toutes les cases du tableau
+            if (!laCase)
+                continue;
+
             int nb = 0;
             std::array<Cercle *, 3> cercles = laCase->getCercles();
             for (Cercle *cercle : cercles) // parcours des cercles dans la case
@@ -147,11 +152,11 @@ bool Plateau::victoireEmpilement(CouleurCercle couleur)
                 if (cercle && cercle->getCouleur() == couleur)
                 {
                     nb++;
-                    if (nb == 3)
-                    {
-                        empilement = true;
-                    }
                 }
+            }
+            if (nb == 3)
+            {
+                empilement = true;
             }
         }
     }
@@ -172,62 +177,62 @@ bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
         // ===== LIGNES =====
         for (int y = 1; y <= 3; ++y)
         {
-            Cercle* c1 = getCase(1, y)->getCercles()[taille];
-            Cercle* c2 = getCase(2, y)->getCercles()[taille];
-            Cercle* c3 = getCase(3, y)->getCercles()[taille];
+            Cercle *c1 = getCase(1, y)->getCercles()[taille];
+            Cercle *c2 = getCase(2, y)->getCercles()[taille];
+            Cercle *c3 = getCase(3, y)->getCercles()[taille];
 
             if (c1 && c2 && c3 &&
                 c1->getCouleur() == couleur &&
                 c2->getCouleur() == couleur &&
                 c3->getCouleur() == couleur)
             {
-                victoire= true;
+                victoire = true;
             }
         }
 
         // ===== COLONNES =====
         for (int x = 1; x <= 3; ++x)
         {
-            Cercle* c1 = getCase(x, 1)->getCercles()[taille];
-            Cercle* c2 = getCase(x, 2)->getCercles()[taille];
-            Cercle* c3 = getCase(x, 3)->getCercles()[taille];
+            Cercle *c1 = getCase(x, 1)->getCercles()[taille];
+            Cercle *c2 = getCase(x, 2)->getCercles()[taille];
+            Cercle *c3 = getCase(x, 3)->getCercles()[taille];
 
             if (c1 && c2 && c3 &&
                 c1->getCouleur() == couleur &&
                 c2->getCouleur() == couleur &&
                 c3->getCouleur() == couleur)
             {
-                victoire= true;
+                victoire = true;
             }
         }
 
         // ===== DIAGONALE PRINCIPALE ↘ ===== (1,1) (2,2) (3,3)
         {
-            Cercle* c1 = getCase(1, 1)->getCercles()[taille];
-            Cercle* c2 = getCase(2, 2)->getCercles()[taille];
-            Cercle* c3 = getCase(3, 3)->getCercles()[taille];
+            Cercle *c1 = getCase(1, 1)->getCercles()[taille];
+            Cercle *c2 = getCase(2, 2)->getCercles()[taille];
+            Cercle *c3 = getCase(3, 3)->getCercles()[taille];
 
             if (c1 && c2 && c3 &&
                 c1->getCouleur() == couleur &&
                 c2->getCouleur() == couleur &&
                 c3->getCouleur() == couleur)
             {
-                victoire= true;
+                victoire = true;
             }
         }
 
         // ===== DIAGONALE SECONDAIRE ↙ ===== (3,1) (2,2) (1,3)
         {
-            Cercle* c1 = getCase(3, 1)->getCercles()[taille];
-            Cercle* c2 = getCase(2, 2)->getCercles()[taille];
-            Cercle* c3 = getCase(1, 3)->getCercles()[taille];
+            Cercle *c1 = getCase(3, 1)->getCercles()[taille];
+            Cercle *c2 = getCase(2, 2)->getCercles()[taille];
+            Cercle *c3 = getCase(1, 3)->getCercles()[taille];
 
             if (c1 && c2 && c3 &&
                 c1->getCouleur() == couleur &&
                 c2->getCouleur() == couleur &&
                 c3->getCouleur() == couleur)
             {
-                victoire= true;
+                victoire = true;
             }
         }
     }
@@ -235,16 +240,136 @@ bool Plateau::victoireAlignementIdentique(CouleurCercle couleur)
     return victoire;
 }
 
-
 /**
- * @brief Vérifie l'alignement de 3 cercles de meme couleur de taille ascendante ou
+ * @brief Vérifie l'alignement de 3 cercles de meme couleur de taille ascendante ou descendante
  *
  * @return true
  * @return false
  */
 bool Plateau::victoireAlignementOrdonnee(CouleurCercle couleur)
 {
+    bool victoire = false;
+    // ===== LIGNES =====
+    for (int y = 1; y <= 3; ++y)
+    {
+        // Ascendant : petit, moyen, grand
+        Cercle *a1 = getCase(1, y)->getCercles()[0];
+        Cercle *a2 = getCase(2, y)->getCercles()[1];
+        Cercle *a3 = getCase(3, y)->getCercles()[2];
+
+        if (a1 && a2 && a3 &&
+            a1->getCouleur() == couleur &&
+            a2->getCouleur() == couleur &&
+            a3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+
+        // Descendant : grand, moyen, petit
+        Cercle *d1 = getCase(1, y)->getCercles()[2];
+        Cercle *d2 = getCase(2, y)->getCercles()[1];
+        Cercle *d3 = getCase(3, y)->getCercles()[0];
+
+        if (d1 && d2 && d3 &&
+            d1->getCouleur() == couleur &&
+            d2->getCouleur() == couleur &&
+            d3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+    }
+
+    // ===== COLONNES =====
+    for (int x = 1; x <= 3; ++x)
+    {
+        // Ascendant : petit, moyen, grand (de haut en bas)
+        Cercle *a1 = getCase(x, 1)->getCercles()[0];
+        Cercle *a2 = getCase(x, 2)->getCercles()[1];
+        Cercle *a3 = getCase(x, 3)->getCercles()[2];
+
+        if (a1 && a2 && a3 &&
+            a1->getCouleur() == couleur &&
+            a2->getCouleur() == couleur &&
+            a3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+
+        // Descendant : grand, moyen, petit
+        Cercle *d1 = getCase(x, 1)->getCercles()[2];
+        Cercle *d2 = getCase(x, 2)->getCercles()[1];
+        Cercle *d3 = getCase(x, 3)->getCercles()[0];
+
+        if (d1 && d2 && d3 &&
+            d1->getCouleur() == couleur &&
+            d2->getCouleur() == couleur &&
+            d3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+    }
+
+    // ===== DIAGONALE PRINCIPALE ↘ ===== (1,1) (2,2) (3,3)
+    {
+        // Ascendant
+        Cercle *a1 = getCase(1, 1)->getCercles()[0];
+        Cercle *a2 = getCase(2, 2)->getCercles()[1];
+        Cercle *a3 = getCase(3, 3)->getCercles()[2];
+
+        if (a1 && a2 && a3 &&
+            a1->getCouleur() == couleur &&
+            a2->getCouleur() == couleur &&
+            a3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+
+        // Descendant
+        Cercle *d1 = getCase(1, 1)->getCercles()[2];
+        Cercle *d2 = getCase(2, 2)->getCercles()[1];
+        Cercle *d3 = getCase(3, 3)->getCercles()[0];
+
+        if (d1 && d2 && d3 &&
+            d1->getCouleur() == couleur &&
+            d2->getCouleur() == couleur &&
+            d3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+    }
+
+    // ===== DIAGONALE SECONDAIRE ↙ ===== (3,1) (2,2) (1,3)
+    {
+        // Ascendant (dans l'ordre (3,1)->(2,2)->(1,3))
+        Cercle *a1 = getCase(3, 1)->getCercles()[0];
+        Cercle *a2 = getCase(2, 2)->getCercles()[1];
+        Cercle *a3 = getCase(1, 3)->getCercles()[2];
+
+        if (a1 && a2 && a3 &&
+            a1->getCouleur() == couleur &&
+            a2->getCouleur() == couleur &&
+            a3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+
+        // Descendant
+        Cercle *d1 = getCase(3, 1)->getCercles()[2];
+        Cercle *d2 = getCase(2, 2)->getCercles()[1];
+        Cercle *d3 = getCase(1, 3)->getCercles()[0];
+
+        if (d1 && d2 && d3 &&
+            d1->getCouleur() == couleur &&
+            d2->getCouleur() == couleur &&
+            d3->getCouleur() == couleur)
+        {
+            victoire = true;
+        }
+    }
+
+    return victoire;
 }
+
 /**
  * @brief Vérifie si l'une des cnditions de victoire est ok
  *
@@ -270,6 +395,4 @@ bool Plateau::victoire(CouleurCercle couleur)
     }
     return false;
     std::cout << "la couleur" << couleur << "a gagné la partie" << std::endl;
-
-    return victoire;
 }
