@@ -54,6 +54,7 @@ void Case::setCercles(Cercle *cercle, int index)
 
 // Méthodes
 
+// Affichage de la case en fonction de sa position
 void Case::AffichageCase(int Pos_X, int Pos_Y)
 {
     // Pour que les cases soient séparéées les unes des autres
@@ -112,8 +113,6 @@ void Case::AffichageCase(int Pos_X, int Pos_Y)
     }
 }
 
-// buffer[startLine + (i - Pos_X)] += ligne;
-
 // Destructeurs
 Case::~Case()
 {
@@ -126,4 +125,3 @@ Case::~Case()
         }
     }
 }
-// Affichage cercle

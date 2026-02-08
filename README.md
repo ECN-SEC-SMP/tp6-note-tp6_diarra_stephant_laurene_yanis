@@ -9,8 +9,8 @@
 
 ## Sommaire
 - [Bot xx](#bot-xx)
-- [Case xx](#case-xx)
-- [Cercle xx](#cercle-xx)
+- [Case xx](#case-André-Louis)
+- [Cercle xx](#cercle-André-Louis)
 - [Controleur xx](#controleur-xx)
 - [Coup xx](#coup-xx)
 - [Joueur Laurène](#joueur-laurène)
@@ -161,9 +161,29 @@ Nous avons créé une batterie de tests avec Google Test pour valider le comport
 
 Au total, 17 tests ont été implémentés et tous passent avec succès.
 
-## Case xx
+## Case André-Louis
+```cpp
+// Constructeurs
+Case::Case()
 
-## Cercle xx
+Case::Case(int Pos_X, int Pos_Y)
+
+// Destructeurs
+Case::~Case()
+
+// Affichage des cases, en fonction de leur position
+void Case::AffichageCase(int Pos_X, int Pos_Y)
+```
+## Cercle André-Louis
+```cpp
+// Constructeurs 
+Cercle::Cercle()
+
+Cercle::Cercle(TailleCercle taille, CouleurCercle couleur)
+
+// Affichage d'un cercle aux coordonnées données, en fonction de sa taille et de sa couleur
+void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
+```
 
 ## Controleur xx
 
@@ -185,8 +205,6 @@ CouleurCercle getCouleur() const;
 int getIdJoueur()const ;
 ```
 
-
-
 ## JoueurHumain Laurène
 ```cpp
 // Définition de la fonction virtuelle
@@ -198,6 +216,33 @@ JoueurHumain( Plateau *p, CouleurCercle c,int id);
 // Destructeur
 ~JoueurHumain() = default;
 ```
+
 ## Plateau André-Louis
+```cpp
+//Constructeurs
+Plateau::Plateau()
+
+// Destructeur
+Plateau::~Plateau()
+
+// Affichage du plateau (génération des cases et des cercles)
+Plateau::Affichage()
+
+// Vérification des conditions de victoire
+Plateau::victoire(CouleurCercle couleur)
+
+// Placer un cercle de son choix sur une case définie
+Plateau::placerCercle(Cercle *cercle, Case *cible)
+
+// Victoire : Empilement des trois cercles sur une même case
+Plateau::victoireEmpilement(CouleurCercle couleur)
+
+// Victoire : alignement de 3 cercles identiques
+Plateau::victoireAlignementIdentique(CouleurCercle couleur)
+
+// Victoire : alignement de 3 cercles en fonction de leur taille (P-M-G ou G-M-P)
+Plateau::victoireAlignementOrdonnee(CouleurCercle couleur)
+```
+
 
 

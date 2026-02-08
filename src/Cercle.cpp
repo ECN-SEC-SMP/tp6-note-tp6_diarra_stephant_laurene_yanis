@@ -38,7 +38,7 @@ void Cercle::setCouleur(CouleurCercle couleur)
 }
 
 // Méthodes
-void Cercle::AffichageCercle(int Pos_X, int Pos_Y)
+void Cercle::AffichageCercle(int Pos_X, int Pos_Y)  // Affichage cercle en fonction de sa taille et de sa couleur
 {
     std::string couleurCase;
     switch (couleur)
