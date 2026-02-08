@@ -1,21 +1,24 @@
-#include <iostream>
-using namespace std;
-
 #include "Coup.hpp"
 /*-------------------------------------------------------------------------------*/
 //Constructeurs
 /*-------------------------------------------------------------------------------*/
 Coup::Coup() {
+    origine = nullptr;
     cercle = nullptr;
     caseCible = nullptr;
 }
-Coup::Coup(Cercle* cercle, Case* caseCible) {
+Coup::Coup(Case* origine, Cercle* cercle, Case* caseCible) {
+    this->origine = origine;
     this->cercle = cercle;
     this->caseCible = caseCible;
 }
 /*-------------------------------------------------------------------------------*/
 //Getters
 /*-------------------------------------------------------------------------------*/
+Case* Coup::getOrigine() {
+    return origine;
+}
+
 Cercle* Coup::getCercle() {
     return cercle;
 }

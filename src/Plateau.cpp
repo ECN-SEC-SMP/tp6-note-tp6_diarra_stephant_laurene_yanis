@@ -4,7 +4,6 @@
 #include "Case.hpp"
 #include "CouleurCercle.hpp"
 #include "TailleCercle.hpp"
-#include "Joueur.hpp"
 #include "Plateau.hpp"
 
 // Constructeurs
@@ -109,10 +108,21 @@ void Plateau::Affichage()
               << std::endl;
 }
 
-bool Plateau::placerCercle(Cercle *cercle, Case *cible)
+bool Plateau::placerCercle(Coup coup)
 {
-    // TODO: STUB
-    return false;
+    if(coup.getOrigine() == nullptr || coup.getCercle() == nullptr || coup.getCaseCible() == nullptr) {
+        return false;
+    }
+
+    if(coup.getCaseCible()->getCercles()[coup.getCercle()->getTaille()] != nullptr) {
+        return false;
+    }
+
+    //déplacer le cercle
+    coup.getOrigine()->setCercles(nullptr, coup.getCercle()->getTaille());
+    coup.getCaseCible()->setCercles(coup.getCercle(), coup.getCercle()->getTaille());
+    
+    return true;
 }
 
 /**

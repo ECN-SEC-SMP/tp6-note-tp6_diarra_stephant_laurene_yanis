@@ -4,13 +4,14 @@
 #include "Joueur.hpp"
 #include "TailleCercle.hpp"
 #include <cstdint>
+#include <iostream>
 
 Bot::Bot(Plateau* plateau, CouleurCercle couleur, int idJoueur) : Joueur(plateau, couleur, idJoueur)
 {
 }
 
 Coup Bot::Jouer() {
-    Coup parade(nullptr, nullptr);
+    Coup parade(nullptr, nullptr, nullptr);
 
     // Menaces immédiates
     
@@ -71,8 +72,9 @@ Coup Bot::Jouer() {
     Case* centre = plateau->getCase(2, 2);
     for (int t = 0; t < 3; t++) {
         if (centre->getCercles()[t] == nullptr) {
-            Cercle* cercle = possedeCercle((TailleCercle)t);
-            if (cercle) return Coup(cercle, centre);
+            Case* origine = nullptr;
+            Cercle* cercle = possedeCercle((TailleCercle)t, &origine);
+            if (cercle && origine) return Coup(origine, cercle, centre);
         }
     }
     
@@ -82,14 +84,15 @@ Coup Bot::Jouer() {
             Case* c = plateau->getCase(x, y);
             for (int t = 0; t < 3; t++) {
                 if (c->getCercles()[t] == nullptr) {
-                    Cercle* cercle = possedeCercle((TailleCercle)t);
-                    if (cercle) return Coup(cercle, c);
+                    Case* origine = nullptr;
+                    Cercle* cercle = possedeCercle((TailleCercle)t, &origine);
+                    if (cercle && origine) return Coup(origine, cercle, c);
                 }
             }
         }
     }
     
-    return Coup(nullptr, nullptr);
+    return Coup(nullptr, nullptr, nullptr);
 }
 
 // ========================================================================
@@ -182,7 +185,7 @@ Bot::PlanificationVictoire Bot::planifierAlignementIdentiques(const std::vector<
         // Vérifier qu'on possède assez de cercles de cette taille
         int cerclesDisponibles = 0;
         for (int i = 0; i < nbAPoser; i++) {
-            if (possedeCercle((TailleCercle)taille)) {
+            if (possedeCercle((TailleCercle)taille, nullptr)) {
                 cerclesDisponibles++;
             }
         }
@@ -193,9 +196,10 @@ Bot::PlanificationVictoire Bot::planifierAlignementIdentiques(const std::vector<
         std::vector<Coup> sequence;
         for (Case* c : cases) {
             if (c->getCercles()[taille] == nullptr) {
-                Cercle* cercle = possedeCercle((TailleCercle)taille);
-                if (cercle) {
-                    sequence.push_back(Coup(cercle, c));
+                Case* origine = nullptr;
+                Cercle* cercle = possedeCercle((TailleCercle)taille, &origine);
+                if (cercle && origine) {
+                    sequence.push_back(Coup(origine, cercle, c));
                 }
             }
         }
@@ -242,7 +246,8 @@ Bot::PlanificationVictoire Bot::planifierAlignementOrdonne(const std::vector<Cas
     // Vérifier qu'on possède les cercles nécessaires
     bool toutesDisponibles = true;
     for (TailleCercle t : taillesManquantes) {
-        if (!possedeCercle(t)) {
+        Case* origineTemp = nullptr;
+        if (!possedeCercle(t, &origineTemp)) {
             toutesDisponibles = false;
             break;
         }
@@ -272,9 +277,10 @@ Bot::PlanificationVictoire Bot::planifierAlignementOrdonne(const std::vector<Cas
             
             // Pour un alignement, on préfère une case vide ou avec un autre cercle
             if (!caseDejaUtilisee) {
-                Cercle* cercle = possedeCercle(taille);
-                if (cercle) {
-                    sequence.push_back(Coup(cercle, c));
+                Case* origine = nullptr;
+                Cercle* cercle = possedeCercle(taille, &origine);
+                if (cercle && origine) {
+                    sequence.push_back(Coup(origine, cercle, c));
                     break; // Une seule case par taille
                 }
             }
@@ -317,9 +323,10 @@ Bot::PlanificationVictoire Bot::planifierEmpilement(Case* c) {
     // Vérifier qu'on possède les cercles nécessaires
     std::vector<Coup> sequence;
     for (TailleCercle taille : taillesManquantes) {
-        Cercle* cercle = possedeCercle(taille);
-        if (cercle) {
-            sequence.push_back(Coup(cercle, c));
+        Case* origine = nullptr;
+        Cercle* cercle = possedeCercle(taille, &origine);
+        if (cercle && origine) {
+            sequence.push_back(Coup(origine, cercle, c));
         }
     }
 
@@ -377,8 +384,9 @@ Coup Bot::analyserAlignement(const std::vector<Case*>& cases) {
                 // Menace adverse détectée
                 for (Case* target : cases) {
                     if (target->getCercles()[t] == nullptr) {
-                        Cercle* monCercle = possedeCercle((TailleCercle)t);
-                        if (monCercle) return Coup(monCercle, target);
+                        Case* origine = nullptr;
+                        Cercle* monCercle = possedeCercle((TailleCercle)t, &origine);
+                        if (monCercle && origine) return Coup(origine, monCercle, target);
                     }
                 }
             }
@@ -390,14 +398,15 @@ Coup Bot::analyserAlignement(const std::vector<Case*>& cases) {
                                         (masques[couleur] == 5 ? TailleCercle::moyenne : TailleCercle::petite);
                 for (Case* target : cases) {
                     if (target->getCercles()[manquante] == nullptr) {
-                        Cercle* monCercle = possedeCercle(manquante);
-                        if (monCercle) return Coup(monCercle, target);
+                        Case* origine = nullptr;
+                        Cercle* monCercle = possedeCercle(manquante, &origine);
+                        if (monCercle && origine) return Coup(origine, monCercle, target);
                     }
                 }
             }
         }
     }
-    return Coup(nullptr, nullptr);
+    return Coup(nullptr, nullptr, nullptr);
 }
 
 Coup Bot::verifierMenaceEmpilement() {
@@ -412,15 +421,16 @@ Coup Bot::verifierMenaceEmpilement() {
                 if (count[i] == 2 && i != Couleur) { // Menace adverse
                     for (int t = 0; t < 3; t++) {
                         if (c->getCercles()[t] == nullptr) {
-                            Cercle* monCercle = possedeCercle((TailleCercle)t);
-                            if (monCercle) return Coup(monCercle, c);
+                            Case* origine = nullptr;
+                            Cercle* monCercle = possedeCercle((TailleCercle)t, &origine);
+                            if (monCercle && origine) return Coup(origine, monCercle, c);
                         }
                     }
                 }
             }
         }
     }
-    return Coup(nullptr, nullptr);
+    return Coup(nullptr, nullptr, nullptr);
 }
 
 Coup Bot::verifierColonne(int col)
@@ -440,7 +450,7 @@ Coup Bot::verifierColonne(int col)
             }
         }
     }
-    return Coup(nullptr, nullptr);
+    return Coup(nullptr, nullptr, nullptr);
 }
 
 Coup Bot::trouverParadeIdentColonne(TailleCercle taille, CouleurCercle couleur, int col)
@@ -449,19 +459,20 @@ Coup Bot::trouverParadeIdentColonne(TailleCercle taille, CouleurCercle couleur, 
         Case* current = plateau->getCase(col, y);
         if(current->getCercles()[taille] != nullptr) continue;
 
-        Cercle* cercle = possedeCercle(taille);
-        if (cercle != nullptr) {
-            return Coup(cercle, current);
+        Case* origine = nullptr;
+        Cercle* cercle = possedeCercle(taille, &origine);
+        if (cercle != nullptr && origine != nullptr) {
+            return Coup(origine, cercle, current);
         } else {
             std::cout << "On est morts, pas de cercle pour contrer" << std::endl;
-            return Coup(nullptr, nullptr);
+            return Coup(nullptr, nullptr, nullptr);
         }
     }
     std::cout << "Fausse menace détectée ? Vérifier colonne a indentifié une menace non existante" << std::endl;
-    return Coup(nullptr, nullptr);
+    return Coup(nullptr, nullptr, nullptr);
 }
 
-Cercle* Bot::possedeCercle(TailleCercle taille)
+Cercle* Bot::possedeCercle(TailleCercle taille, Case** origine)
 {
     int x, y, maxX, maxY;
 
@@ -484,9 +495,12 @@ Cercle* Bot::possedeCercle(TailleCercle taille)
         for (; y <= maxY; y++) {
             Case* c = plateau->getCase(x, y);
             if(c->getCercles()[taille] != nullptr) {
+                if (origine) *origine = c;  // Stocker la case d'origine
                 return c->getCercles()[taille];
             }
         }
     }
+    
+    if (origine) *origine = nullptr;
     return nullptr;
 }

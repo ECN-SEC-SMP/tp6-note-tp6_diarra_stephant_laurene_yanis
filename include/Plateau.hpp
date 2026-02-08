@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Case.hpp"
+#include "Coup.hpp"
 
 class Plateau
 {
@@ -17,7 +18,7 @@ public:
 
     // Méthodes
     void Affichage();
-    bool placerCercle(Cercle* cercle, Case* cible);
+    bool placerCercle(Coup coup);
     bool victoireEmpilement(CouleurCercle couleur);
     bool victoireAlignementIdentique(CouleurCercle couleur);
     bool victoireAlignementOrdonnee(CouleurCercle couleur);

@@ -15,7 +15,14 @@ private:
     Coup trouverParadeIdentColonne(TailleCercle taille, CouleurCercle c, int col);
     Coup analyserAlignement(const std::vector<Case*>& cases);
     Coup verifierMenaceEmpilement();
-    Cercle* possedeCercle(TailleCercle taille);
+    
+    /**
+     * @brief Trouve un cercle disponible dans la réserve du joueur
+     * @param taille Taille du cercle recherché
+     * @param origine [OUT] Pointeur vers la case d'origine (sera modifié)
+     * @return Pointeur vers le cercle trouvé, ou nullptr
+     */
+    Cercle* possedeCercle(TailleCercle taille, Case** origine);
 
     /**
      * @brief Structure pour représenter une séquence de coups planifiés

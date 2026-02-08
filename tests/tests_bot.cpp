@@ -240,7 +240,7 @@ TEST_F(BotPlanificationTest, Planification_AlignementOrdonne_PMG_Ligne) {
     
     // Le bot doit compléter avec un Grand
     ASSERT_NE(coup.getCaseCible(), nullptr);
-    cout << coup.getCaseCible()->getPosX() << " " << coup.getCaseCible()->getPosY() << std::endl;
+    std::cout << coup.getCaseCible()->getPosX() << " " << coup.getCaseCible()->getPosY() << std::endl;
     EXPECT_TRUE(coupCible(coup, 3, 2)) << "Le bot doit compléter l'ordre P-M-G en (3,2)";
     EXPECT_TRUE(coupUtiliseTaille(coup, grande));
 }
