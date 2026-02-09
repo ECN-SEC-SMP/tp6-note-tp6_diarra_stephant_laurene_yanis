@@ -17,6 +17,57 @@ JoueurHumain::JoueurHumain(Plateau *p, CouleurCercle c, int id) : Joueur(p, c, i
 }
 
 
+/**
+ * @brief Recherche un cercle disponible de la taille donnée dans les ressources du joueur
+ *
+ * Parcourt les cases de ressources associées à la couleur du joueur
+ * afin de trouver un cercle de la taille spécifiée.
+ * Si un cercle est trouvé, la fonction retourne un pointeur vers ce cercle
+ * et renseigne la case d'origine correspondante.
+ *
+ * @param taille Taille du cercle recherché (petite, moyenne ou grande)
+ * @param origine Pointeur vers un pointeur de Case permettant de récupérer
+ *                la case d'où provient le cercle trouvé.
+ *                Si aucun cercle n'est trouvé, *origine est mis à nullptr.
+ *
+ * @return Cercle* Pointeur vers le cercle trouvé.
+ *         Retourne nullptr si aucun cercle de la taille demandée
+ *         n'est disponible dans les ressources du joueur.
+ */
+Cercle* JoueurHumain::possedeCercle(TailleCercle taille, Case** origine)
+{
+    int x, y, maxX, maxY;
+
+    switch (Couleur) {
+    case rouge:
+        y = 4; maxY = 4; x = 1; maxX = 3;
+        break;
+    case bleu:
+        y = 0; maxY = 0; x = 1; maxX = 3;
+        break;
+    case jaune:
+        y = 1; maxY = 3; x = 0; maxX = 0;
+        break;
+    case vert:
+        y = 1; maxY = 3; x = 4; maxX = 4;
+        break;
+    }
+
+    for (; x <= maxX; x++) {
+        for (; y <= maxY; y++) {
+            Case* c = plateau->getCase(x, y);
+            if(c->getCercles()[taille] != nullptr) {
+                if (origine) *origine = c;  // Stocker la case d'origine
+                return c->getCercles()[taille];
+            }
+        }
+    }
+    
+    if (origine) *origine = nullptr;
+    return nullptr;
+}
+
+
 
 
 /**
@@ -44,7 +95,7 @@ Coup JoueurHumain::Jouer()  {
     Case* caseOrigine = nullptr;
     int caseColonneOrigine = 0;
     int caseLigneOrigine = 0;
-    Bot* bot;
+    // Bot* bot;
 
     while(retry){
         retry = 0;
@@ -65,8 +116,8 @@ Coup JoueurHumain::Jouer()  {
         else newTailleCercle = grande;
 
         // Case d'origine
-        Case* caseOrigine = plateau->getCase(caseColonneOrigine, caseLigneOrigine);
-        Cercle* cercle = bot->possedeCercle(newTailleCercle, &caseOrigine);
+        caseOrigine = plateau->getCase(caseColonneOrigine, caseLigneOrigine);
+        Cercle* cercle = this->possedeCercle(newTailleCercle, &caseOrigine);
 
         
         // Vérification du respect des ensembles de définitions
