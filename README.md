@@ -8,16 +8,18 @@
 - Yanis COUSSEAU     
 
 ## Sommaire
-- [Bot xx](#bot-xx)
-- [Case xx](#case-André-Louis)
-- [Cercle xx](#cercle-André-Louis)
-- [Controleur xx](#controleur-xx)
-- [Coup xx](#coup-xx)
+- [Bot Yanis](#implémentation-du-bot-yanis)
+- [Case AL](#case-andré-louis)
+- [Cercle AL](#cercle-andré-louis)
+- [Controleur Diarra](#controleur-diarra)
+- [Coup Diarra](#coup-diarra)
 - [Joueur Laurène](#joueur-laurène)
 - [JoueurHumain Laurène](#joueurhumain-laurène)
 - [Plateau André-Louis](#plateau-andré-louis)
 
-# Implémentation du Bot
+
+
+# Implémentation du Bot Yanis
 
 ## Introduction
 
@@ -245,6 +247,7 @@ Le contrôleur a été testé avec GoogleTest sur :
 - Bonne séparation logique
 - Gestion des erreurs simple et robuste
 - Tests unitaires fonctionnels
+
 ## Coup Diarra
 La classe Coup a été ajoutée lors de l’implémentation de la classe Controleur.
 En effet, lors de la conception du contrôleur, il est apparu plus propre et plus cohérent de représenter un coup de manière structurée plutôt que de manipuler séparément :
