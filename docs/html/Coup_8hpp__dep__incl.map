@@ -1,0 +1,13 @@
+<map id="include/Coup.hpp" name="include/Coup.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="53,5,187,32"/>
+<area shape="rect" id="node2" href="$Controleur_8cpp.html" title=" " alt="" coords="5,229,144,256"/>
+<area shape="rect" id="node3" href="$Coup_8cpp.html" title=" " alt="" coords="67,80,173,107"/>
+<area shape="rect" id="node4" href="$Joueur_8hpp.html" title=" " alt="" coords="265,80,407,107"/>
+<area shape="rect" id="node5" href="$Joueur_8cpp.html" title=" " alt="" coords="672,155,784,181"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title=" " alt="" coords="205,229,310,256"/>
+<area shape="rect" id="node7" href="$Bot_8hpp.html" title=" " alt="" coords="525,155,648,181"/>
+<area shape="rect" id="node9" href="$Controleur_8hpp.html" title=" " alt="" coords="64,155,232,181"/>
+<area shape="rect" id="node10" href="$JoueurHumain_8hpp.html" title=" " alt="" coords="307,155,501,181"/>
+<area shape="rect" id="node8" href="$Bot_8cpp.html" title=" " alt="" coords="539,229,634,256"/>
+<area shape="rect" id="node11" href="$JoueurHumain_8cpp.html" title=" " alt="" coords="334,229,498,256"/>
+</map>

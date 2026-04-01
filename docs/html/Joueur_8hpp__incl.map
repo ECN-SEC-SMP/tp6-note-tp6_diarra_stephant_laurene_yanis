@@ -1,0 +1,13 @@
+<map id="include/Joueur.hpp" name="include/Joueur.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="131,5,272,32"/>
+<area shape="rect" id="node2" href="$CouleurCercle_8hpp.html" title=" " alt="" coords="5,304,147,331"/>
+<area shape="rect" id="node3" href="$Coup_8hpp.html" title=" " alt="" coords="160,80,243,107"/>
+<area shape="rect" id="node11" href="$Plateau_8hpp.html" title=" " alt="" coords="267,80,365,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="116,155,196,181"/>
+<area shape="rect" id="node5" href="$Cercle_8hpp.html" title=" " alt="" coords="188,229,279,256"/>
+<area shape="rect" id="node8" href="$Case_8hpp.html" title=" " alt="" coords="275,155,357,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="320,304,379,331"/>
+<area shape="rect" id="node7" href="$TailleCercle_8hpp.html" title=" " alt="" coords="171,304,296,331"/>
+<area shape="rect" id="node9" title=" " alt="" coords="353,229,409,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="434,229,497,256"/>
+</map>
